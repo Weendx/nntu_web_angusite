@@ -8,4 +8,5 @@ footer {
 
 .copyright {
   color: var(--color-white-3);
+  font-size: 0.9em;
 }
