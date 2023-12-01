@@ -1,5 +1,5 @@
 .header {
-    --header-height: 28rem;
+    --header-height: 25rem;
     position: relative;
     min-height: var(--header-height);
 }
