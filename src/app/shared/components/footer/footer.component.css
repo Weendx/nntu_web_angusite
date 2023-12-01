@@ -1,0 +1,11 @@
+footer {
+  height: 3rem;
+  background: var(--color-main-dd);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyright {
+  color: var(--color-white-3);
+}
