@@ -1,22 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'assets/colors.css';
-
-@font-face {
-  font-family: 'Montserrat';
-  src: url('assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  src: url('assets/fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Montserrat Alternates';
-  src: url('assets/fonts/MontserratAlternates-Medium.ttf');
-  font-weight: 500;
-}
+@import 'assets/fonts.css';
 
 * {
   margin: 0;
