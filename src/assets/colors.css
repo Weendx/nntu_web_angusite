@@ -6,24 +6,28 @@
   --color-main-dd: #6A3708;
   --color-main-b: #D18B4B;
   --color-main-bb: #D19E6F;
+  --color-main-hover: #AC6B2F;
 
   --color-secondary-a: #A37718;
   --color-secondary-a-d: #7A622C;
   --color-secondary-a-dd: #6A4B08;
   --color-secondary-a-b: #D1A74B;
   --color-secondary-a-bb: #D1B26F;
+  --color-secondary-a-hover: #AC852F;
 
   --color-secondary-b: #A32218;
   --color-secondary-b-d: #7A322C;
   --color-secondary-b-dd: #6A0F08;
   --color-secondary-b-b: #D1554B;
   --color-secondary-b-bb: #D1766F;
+  --color-secondary-b-hover: #AC382F;
 
   --color-additional: #105A64;
   --color-additional-d: #1C454B;
   --color-additional-dd: #053A41;
   --color-additional-b: #42A4B1;
   --color-additional-bb: #60A7B1;
+  --color-additional-hover: #286B74;
 
   --color-white-1: #ffffff;
   --color-white-2: #fbfbfb;

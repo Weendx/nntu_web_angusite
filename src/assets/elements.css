@@ -18,3 +18,16 @@ button {
   border: 0;
   cursor: pointer;
 }
+
+/* --- */
+.spacing_size_sm {
+  margin-top: 0.6rem;
+}
+
+.spacing_size_m {
+  margin-top: 1.5rem;
+}
+
+.spacing_size_l {
+  margin-top: 2.5rem;
+}
