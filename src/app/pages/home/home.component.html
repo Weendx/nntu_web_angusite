@@ -1,5 +1,32 @@
-<p>home works!</p>
-<container header="Раз два раз два сели встали сели встали">
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima, dolor laborum eius nihil molestiae fugiat,
-        atque eaque cum iste dolorum harum, facere asperiores odit.</p>
-</container>
+<div class="home">
+    <app-page-layout>
+        <div slot="article">
+            <app-container header="Информация о проекте">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis, consequuntur?</p>
+            </app-container>
+            <app-container header="Второй сервер отмечает день рождения!">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde nulla nam assumenda eligendi illum
+                    doloribus. Porro, quam quae amet ea rem animi?</p>
+            </app-container>
+            <app-container header="Изменения в двухфакторной аутентификации">
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel est perspiciatis obcaecati
+                    exercitationem accusantium commodi maiores nostrum nesciunt, modi aspernatur?</p>
+            </app-container>
+        </div>
+        <div slot="aside">
+            <app-container header="Личный кабинет">
+                <input type="text" placeholder="Логин или Email">
+                <input type="text" placeholder="Пароль"><br>
+                <input type="submit" value="Войти"><br>
+                <button>Зарегистрироваться</button>
+                <button>Восстановить пароль</button>
+            </app-container>
+            <app-container header="Мониторинг">
+                <div class="monitoring">
+                    <div class="item1">Сервер #1</div>
+                    <div class="item2">Сервер #2</div>
+                </div>
+            </app-container>
+        </div>
+    </app-page-layout>
+</div>
