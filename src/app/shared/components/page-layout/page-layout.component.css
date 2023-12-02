@@ -4,6 +4,10 @@
     margin: 4rem 0;
 }
 
+.page-layout article {
+    max-width: 60%;
+}
+
 .page-layout [slot=article] {
     display: flex;
     flex-direction: column;
