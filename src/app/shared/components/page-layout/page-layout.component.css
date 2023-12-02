@@ -1,0 +1,17 @@
+.page-layout {
+    display: flex;
+    gap: 4rem;
+    margin: 4rem 0;
+}
+
+.page-layout [slot=article] {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.page-layout [slot=aside] {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
