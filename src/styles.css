@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'assets/colors.css';
 @import 'assets/fonts.css';
+@import 'assets/elements.css';
 
 * {
   margin: 0;
