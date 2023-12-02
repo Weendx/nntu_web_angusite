@@ -1,0 +1,23 @@
+<app-page-layout>
+    <div slot="article">
+        <app-container header="Регистрация">
+            <div class="spacing_size_m"></div>
+            <app-registration-form></app-registration-form>
+        </app-container>
+    </div>
+    <div slot="aside">
+        <app-container header="Личный кабинет">
+            <input type="text" placeholder="Логин или Email">
+            <input type="text" placeholder="Пароль"><br>
+            <input type="submit" value="Войти"><br>
+            <a routerLink="signup">Зарегистрироваться</a><br>
+            <a href="#">Восстановить пароль</a>
+        </app-container>
+        <app-container header="Мониторинг">
+            <div class="monitoring">
+                <div class="item1">Сервер #1</div>
+                <div class="item2">Сервер #2</div>
+            </div>
+        </app-container>
+    </div>
+</app-page-layout>

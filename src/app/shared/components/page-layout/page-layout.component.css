@@ -5,6 +5,7 @@
 }
 
 .page-layout article {
+    min-width: 60%;
     max-width: 60%;
 }
 

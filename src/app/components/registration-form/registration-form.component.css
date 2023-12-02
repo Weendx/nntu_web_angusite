@@ -1,0 +1,43 @@
+.signup__group-fields {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    row-gap: 0.75rem;
+    align-items: center;
+}
+
+.signup__group-fields label {
+    font-size: 0.9em;
+}
+
+.signup__group-checkboxes {
+    padding-left: 1rem;
+    cursor: pointer;
+}
+
+.signup__group-checkboxes label {
+    font-size: 0.9em
+}
+
+.signup__group-checkboxes>div~div {
+    margin-top: 0.4rem;
+}
+
+.signup__group-checkboxes input[type=checkbox] {
+    margin-right: 0.65rem;
+}
+
+.signup__group-submit {
+    text-align: center;
+}
+
+.signup__group-submit input[type=submit] {
+    width: 50%;
+    max-width: 300px;
+    background: var(--color-secondary-b);
+    color: var(--color-white-1);
+    cursor: pointer;
+}
+
+.signup__group-submit input[type=submit]:hover {
+    background: var(--color-secondary-b-hover);
+}
