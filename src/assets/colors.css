@@ -33,10 +33,13 @@
   --color-white-2: #fbfbfb;
   --color-white-3: #E4E4E4;
   --color-white-4: #CFCFCF;
+  --color-white-5: #b9b9b9;
 
   --color-black-1: #000000;
   --color-black-2: #141414;
   --color-black-3: #222222;
+
+  --color-red-1: #C91919;
 
   --color-background: #F3F3F3;
 }

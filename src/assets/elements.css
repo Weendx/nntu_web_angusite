@@ -1,10 +1,14 @@
+:root {
+  --elements-border-radius: 4px;
+}
+
 input {
   padding: 0.9rem 0.75rem;
   background: var(--color-white-2);
   background-clip: padding-box;
   border: 0;
   border: solid 1px var(--color-white-3);
-  border-radius: 4px;
+  border-radius: var(--elements-border-radius);
   letter-spacing: 0.15px;
 }
 
@@ -17,6 +21,7 @@ button {
   padding: 0.9rem 0.75rem;
   border: 0;
   cursor: pointer;
+  border-radius: var(--elements-border-radius);
 }
 
 /* --- */
