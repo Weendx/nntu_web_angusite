@@ -9,7 +9,8 @@
     font-size: 0.9em;
 }
 
-.signup__group-fields input {
+.signup__group-fields input,
+.signup__group-fields select {
     width: 100%;
 }
 

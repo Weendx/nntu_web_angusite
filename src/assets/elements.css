@@ -2,7 +2,8 @@
   --elements-border-radius: 4px;
 }
 
-input {
+input,
+select {
   padding: 0.9rem 0.75rem;
   background: var(--color-white-2);
   background-clip: padding-box;
@@ -12,10 +13,12 @@ input {
   letter-spacing: 0.15px;
 }
 
-input:focus-visible {
+input:focus-visible,
+select:focus-visible {
   outline: var(--color-white-3) auto 1px;
 
 }
+
 
 button {
   padding: 0.9rem 0.75rem;

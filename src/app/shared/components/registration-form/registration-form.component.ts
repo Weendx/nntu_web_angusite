@@ -25,6 +25,7 @@ export class RegistrationFormComponent implements OnInit {
     'formErrorMsg': ['signup_hide']
   };
   public formErrorMessage: string = '';
+  public isFormSubmitted = false;
 
   public ngOnInit(): void {
     this.form = new FormGroup({
@@ -39,6 +40,12 @@ export class RegistrationFormComponent implements OnInit {
       ]),
       email: new FormControl<string>('', [
         Validators.required, Validators.email
+      ]),
+      question: new FormControl<string>('', [
+        Validators.required
+      ]),
+      answer: new FormControl<string>('', [ 
+        Validators.required 
       ]),
       rulesCheck: new FormControl<boolean>(false, [
         Validators.requiredTrue
@@ -65,6 +72,14 @@ export class RegistrationFormComponent implements OnInit {
     return this.form.get('email') as FormControl;
   }
 
+  get question(): FormControl {
+    return this.form.get('question') as FormControl;
+  }
+
+  get answer(): FormControl {
+    return this.form.get('answer') as FormControl;
+  }
+
   get rulesCheck(): FormControl {
     return this.form.get('rulesCheck') as FormControl;
   }
@@ -74,6 +89,7 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   public submit(): void {
+    this.isFormSubmitted = true;
     if (this.rulesCheck.hasError('required')) {
       this.classes.rulesCheck.push('invalid');
       setTimeout(() => {

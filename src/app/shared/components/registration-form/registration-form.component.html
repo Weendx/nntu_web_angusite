@@ -3,14 +3,15 @@
         <label for="singup__username">Имя пользователя</label>
         <div>
             <input type="text" id="singup__username" placeholder="Имя пользователя" formControlName="username">
-            <p *ngIf="username.touched && username.hasError('required')">* Введите имя пользователя</p>
+            <p *ngIf="(username.touched || isFormSubmitted) && username.hasError('required')">* Введите имя пользователя
+            </p>
             <p *ngIf="username.touched && username.hasError('minlength')">
                 * Минимальная длина: {{ username.errors?.minlength?.requiredLength }}</p>
         </div>
         <label for="singup__password">Пароль</label>
         <div>
             <input type="password" id="singup__password" placeholder="Пароль" formControlName="password">
-            <p *ngIf="password.touched && password.hasError('required')">* Введите пароль</p>
+            <p *ngIf="(password.touched || isFormSubmitted) && password.hasError('required')">* Введите пароль</p>
             <p *ngIf="password.touched && password.hasError('minlength')">
                 * Минимальная длина: {{ password.errors?.minlength?.requiredLength }}</p>
         </div>
@@ -18,14 +19,36 @@
         <div>
             <input type="password" id="singup__password-repeat" placeholder="Повтор пароля"
                 formControlName="passwordRepeat">
-            <p *ngIf="passwordRepeat.touched && passwordRepeat.hasError('required')">* Повторите пароль</p>
+            <p *ngIf="(passwordRepeat.touched || isFormSubmitted) && passwordRepeat.hasError('required')">* Повторите
+                пароль</p>
             <p *ngIf="passwordRepeat.touched && passwordRepeat.hasError('equalTo')">* Пароли не совпадают</p>
         </div>
         <label for="signup__email">Email адрес</label>
         <div>
             <input type="email" id="signup__email" placeholder="Email адрес" formControlName="email">
-            <p *ngIf="email.touched && email.hasError('required')">* Введите Email адрес</p>
+            <p *ngIf="(email.touched || isFormSubmitted) && email.hasError('required')">* Введите Email адрес</p>
             <p *ngIf="email.touched && email.hasError('email')">* Неккоректный Email адрес</p>
+        </div>
+        <label for="signup__question">Контрольный вопрос</label>
+        <div>
+            <select id="signup__question" formControlName="question">
+                <option value="q0" disabled selected>Контрольный вопрос</option>
+                <option value="q1-mailindex">Почтовый индекс ваших родителей</option>
+                <option value="q2-maidenname">Девичья фамилия матери</option>
+                <option value="q3-carmodel">Модель вашей первой машины</option>
+                <option value="q4-author">Любимый писатель</option>
+                <option value="q5-petname">Кличка домашнего животного</option>
+                <option value="q6-profession">Профессия вашего дедушки</option>
+                <option value="q7-favdish">Любимое блюдо</option>
+            </select>
+            <p *ngIf="(question.touched || isFormSubmitted) && question.hasError('required')">* Выберите контрольный
+                вопрос</p>
+        </div>
+        <label for="signup__answer">Ответ на вопрос</label>
+        <div>
+            <input type="text" id="signup__answer" placeholder="Ответ на вопрос" formControlName="answer">
+            <p *ngIf="(answer.touched || isFormSubmitted) && answer.hasError('required')">* Введите ответ на контрольный
+                вопрос</p>
         </div>
     </div>
     <div class="spacing_size_m"></div>
