@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="spacing_size_m"></div>
+    <div class="signin__fields">
+        <div [ngClass]="{'invalid': login.touched && login.invalid}">
+            <label for="signin__login">Логин</label>
+            <input type="text" id="signin__login" placeholder="Логин или Email" formControlName="login">
+            <div class="errors">
+                <p *ngIf="login.touched && login.hasError('required')">* Введите Логин или Email</p>
+            </div>
+        </div>
+        <div [ngClass]="{'invalid': password.touched && password.invalid}">
+            <label for="signin__password">Пароль</label>
+            <input type="password" id="signin__password" placeholder="Пароль" formControlName="password">
+            <div class="errors">
+                <p *ngIf="password.touched && password.hasError('required')">* Введите пароль</p>
+            </div>
+        </div>
+    </div>
+    <div class="spacing_size_l"></div>
+    <div class="signin__buttons">
+        <input type="submit" value="Войти">
+        <a routerLink="signup">Зарегистрироваться</a>
+        <a href="#">Восстановить пароль</a>
+    </div>
+</form>
