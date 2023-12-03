@@ -1,28 +1,51 @@
-<form action="">
+<form [formGroup]="form" (ngSubmit)="submit()">
     <div class="signup__group-fields">
         <label for="singup__username">Имя пользователя</label>
-        <input type="text" id="singup__username" placeholder="Имя пользователя">
+        <div>
+            <input type="text" id="singup__username" placeholder="Имя пользователя" formControlName="username">
+            <p *ngIf="username.touched && username.hasError('required')">* Введите имя пользователя</p>
+            <p *ngIf="username.touched && username.hasError('minlength')">
+                * Минимальная длина: {{ username.errors?.minlength?.requiredLength }}</p>
+        </div>
         <label for="singup__password">Пароль</label>
-        <input type="password" id="singup__password" placeholder="Пароль">
+        <div>
+            <input type="password" id="singup__password" placeholder="Пароль" formControlName="password">
+            <p *ngIf="password.touched && password.hasError('required')">* Введите пароль</p>
+            <p *ngIf="password.touched && password.hasError('minlength')">
+                * Минимальная длина: {{ password.errors?.minlength?.requiredLength }}</p>
+        </div>
         <label for="singup__password-repeat">Повтор пароля</label>
-        <input type="password" id="singup__password-repeat" placeholder="Повтор пароля">
+        <div>
+            <input type="password" id="singup__password-repeat" placeholder="Повтор пароля"
+                formControlName="passwordRepeat">
+            <p *ngIf="passwordRepeat.touched && passwordRepeat.hasError('required')">* Повторите пароль</p>
+            <p *ngIf="passwordRepeat.touched && passwordRepeat.hasError('equalTo')">* Пароли не совпадают</p>
+        </div>
         <label for="signup__email">Email адрес</label>
-        <input type="email" id="signup__email" placeholder="Email адрес">
+        <div>
+            <input type="email" id="signup__email" placeholder="Email адрес" formControlName="email">
+            <p *ngIf="email.touched && email.hasError('required')">* Введите Email адрес</p>
+            <p *ngIf="email.touched && email.hasError('email')">* Неккоректный Email адрес</p>
+        </div>
     </div>
     <div class="spacing_size_m"></div>
     <div class="signup__group-checkboxes">
         <div>
-            <input type="checkbox" id="signup__agree-rules">
-            <label for="signup__agree-rules">Я прочитал и согласен с Условиями Проекта</label>
+            <input type="checkbox" id="signup__agree-rules" formControlName="rulesCheck">
+            <label for="signup__agree-rules" [ngClass]="classes.rulesCheck">Я прочитал и согласен с
+                Условиями Проекта</label>
         </div>
         <div>
-            <input type="checkbox" id="signup__captcha">
-            <label for="signup__captcha">Я человек</label>
+            <input type="checkbox" id="signup__captcha" formControlName="captchaCheck">
+            <label for="signup__captcha" [ngClass]="classes.captchaCheck">Я человек</label>
         </div>
     </div>
     <div class="spacing_size_l"></div>
     <div class="signup__group-submit">
         <input type="submit" value="Регистрация">
+    </div>
+    <div class="signup__group-msg">
+        <p [ngClass]="classes.formErrorMsg">{{ formErrorMessage }}</p>
     </div>
     <div class="spacing_size_m"></div>
 </form>

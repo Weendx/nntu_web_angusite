@@ -9,13 +9,23 @@
     font-size: 0.9em;
 }
 
+.signup__group-fields input {
+    width: 100%;
+}
+
+.signup__group-fields p {
+    font-size: 0.8em;
+    color: var(--color-red-1);
+}
+
 .signup__group-checkboxes {
     padding-left: 1rem;
     cursor: pointer;
 }
 
 .signup__group-checkboxes label {
-    font-size: 0.9em
+    font-size: 0.9em;
+    transition: color .3s;
 }
 
 .signup__group-checkboxes>div~div {
@@ -40,4 +50,30 @@
 
 .signup__group-submit input[type=submit]:hover {
     background: var(--color-secondary-b-hover);
+}
+
+.signup__group-msg {
+    display: flex;
+    justify-content: center;
+}
+
+.signup__group-msg p {
+    color: var(--color-red-1);
+    font-size: 0.8em;
+    transition: 0.8s;
+    position: absolute;
+}
+
+.signup_hide {
+    opacity: 0;
+}
+
+input.ng-touched.ng-invalid {
+    color: var(--color-red-1);
+    border-color: var(--color-red-1);
+}
+
+.invalid {
+    color: var(--color-red-1);
+    border-color: var(--color-red-1);
 }
