@@ -1,0 +1,40 @@
+.chngpass__group-fields {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    row-gap: 0.75rem;
+    align-items: center;
+}
+
+.chngpass__group-fields label {
+    font-size: 0.9em;
+}
+
+.chngpass__group-fields input,
+.chngpass__group-fields select {
+    width: 100%;
+}
+
+.chngpass__group-fields p {
+    font-size: 0.8em;
+    color: var(--color-red-1);
+}
+
+#chngpass__question {
+    background: var(--color-white-1);
+}
+
+.chngpass__group-submit {
+    text-align: center;
+}
+
+.chngpass__group-submit input[type=submit] {
+    width: 50%;
+    max-width: 300px;
+    background: var(--color-secondary-b);
+    color: var(--color-white-1);
+    cursor: pointer;
+}
+
+.chngpass__group-submit input[type=submit]:hover {
+    background: var(--color-secondary-b-hover);
+}

@@ -3,8 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule)},
-  {path: 'signup', pathMatch: 'full', loadChildren: () => import('./pages/signup/signup.module').then((m) => m.SignupModule)}
+  {
+    path: '', pathMatch: 'full', 
+    loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule)
+  },
+  {
+    path: 'signup', pathMatch: 'full', 
+    loadChildren: () => import('./pages/signup/signup.module').then((m) => m.SignupModule)
+  },
+  {
+    path: 'reset-password', pathMatch: 'full', 
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then((m) => m.ResetPasswordModule)
+  }
 ];
 
 @NgModule({

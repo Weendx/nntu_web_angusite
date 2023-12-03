@@ -3,7 +3,8 @@
 }
 
 input,
-select {
+select,
+.form-field {
   padding: 0.9rem 0.75rem;
   background: var(--color-white-2);
   background-clip: padding-box;

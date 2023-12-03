@@ -4,13 +4,15 @@ import { RegistrationFormComponent } from '../../components/registration-form/re
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ChngpassFormComponent } from '../../components/chngpass-form/chngpass-form.component';
 
 
 
 @NgModule({
   declarations: [
     RegistrationFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    ChngpassFormComponent,
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { RouterLink } from '@angular/router';
   ],
   exports: [
     RegistrationFormComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    ChngpassFormComponent
   ]
 })
 export class AuthModule { }
