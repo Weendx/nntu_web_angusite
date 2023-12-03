@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SignupComponent } from './signup.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { RegistrationFormComponent } from 'src/app/components/registration-form/registration-form.component';
+import { AuthModule } from 'src/app/shared/modules/auth/auth.module';
 
 
 const routes: Routes = [
@@ -12,12 +12,12 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    SignupComponent,
-    RegistrationFormComponent
+    SignupComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
+    AuthModule,
     RouterModule.forChild(routes)
   ],
   exports: [
