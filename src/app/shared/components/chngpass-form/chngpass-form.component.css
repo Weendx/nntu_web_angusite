@@ -5,8 +5,10 @@
     align-items: center;
 }
 
-.chngpass__group-fields label {
+.chngpass__group-fields label,
+.chngpass__group-fields span {
     font-size: 0.9em;
+    cursor: default;
 }
 
 .chngpass__group-fields input,
@@ -20,7 +22,8 @@
 }
 
 #chngpass__question {
-    background: var(--color-white-1);
+    background: #f7f7f7;
+    font-size: 0.95em;
 }
 
 .chngpass__group-submit {

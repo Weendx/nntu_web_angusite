@@ -1,13 +1,27 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="submit" #ngform="ngForm">
     <div class="chngpass__group-fields">
         <label for="chngpass__newPassword">Новый пароль</label>
-        <input type="password" id="chngpass__newPassword">
+        <div>
+            <input type="password" id="chngpass__newPassword" formControlName="newPassword">
+            <p *ngIf="(newPassword.touched || ngform.submitted) && newPassword.hasError('required')">* Введите новый
+                пароль</p>
+        </div>
         <label for="chngpass__newPasswordRepeat">Повтор пароля</label>
-        <input type="password" id="chngpass__newPasswordRepeat">
-        <label for="chngpass__question">Контрольный вопрос</label>
+        <div>
+            <input type="password" id="chngpass__newPasswordRepeat" formControlName="newPasswordRepeat">
+            <p *ngIf="(newPasswordRepeat.touched || ngform.submitted) && newPasswordRepeat.hasError('required')">*
+                Повторите пароль</p>
+            <p *ngIf="(newPasswordRepeat.touched || ngform.submitted) && newPasswordRepeat.hasError('equalTo')">* Пароли
+                не совпадают</p>
+        </div>
+        <span>Контрольный вопрос</span>
         <span id="chngpass__question" class="form-field">Почтовый индекс ваших родителей</span>
         <label for="chngpass__answer">Ответ</label>
-        <input type="text" id="chngpass__answer">
+        <div>
+            <input type="text" id="chngpass__answer" formControlName="answer">
+            <p *ngIf="(answer.touched || ngform.submitted) && answer.hasError('required')">* Введите ответ на
+                контрольный вопрос</p>
+        </div>
     </div>
     <div class="spacing_size_l"></div>
     <div class="chngpass__group-submit">
