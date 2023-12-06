@@ -1,18 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { IUser } from '../../models/user';
+import { equalToValidator } from '../../validators';
 
-
-const checkIsPasswordsEqual: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const password = control.parent?.get('password');
-  const passwordRepeat = control.parent?.get('passwordRepeat');
-  if (password == null || passwordRepeat == null)
-    return null;
-  if (password.value !== passwordRepeat.value)
-    return { equalTo: true }
-  return null
-}
 
 @Component({
   selector: 'app-registration-form',
@@ -41,7 +32,7 @@ export class RegistrationFormComponent implements OnInit {
         Validators.required, Validators.minLength(8)
       ]),
       passwordRepeat: new FormControl<string>('', [
-        Validators.required, checkIsPasswordsEqual
+        Validators.required, equalToValidator('password')
       ]),
       email: new FormControl<string>('', [
         Validators.required, Validators.email

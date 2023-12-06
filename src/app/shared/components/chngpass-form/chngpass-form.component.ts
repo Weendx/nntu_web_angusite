@@ -1,16 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { equalToValidator } from '../../validators';
 
-
-const isPasswordsEqual: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  const password = control.parent?.get('newPassword');
-  const passwordRepeat = control.parent?.get('newPasswordRepeat');
-  if (password == null || passwordRepeat == null)
-    return null;
-  if (password.value !== passwordRepeat.value)
-    return { equalTo: true }
-  return null
-}
 
 @Component({
   selector: 'app-chngpass-form',
@@ -24,7 +15,9 @@ export class ChngpassFormComponent implements OnInit {
   public ngOnInit(): void {
     this.form = new FormGroup({
       newPassword: new FormControl<string>('', [ Validators.required ]),
-      newPasswordRepeat: new FormControl<string>('', [ Validators.required, isPasswordsEqual ]),
+      newPasswordRepeat: new FormControl<string>('', [ 
+        Validators.required, equalToValidator('newPassword') 
+      ]),
       answer: new FormControl<string>('', [ Validators.required ])
     });
   }
