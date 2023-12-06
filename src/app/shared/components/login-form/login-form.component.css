@@ -74,3 +74,28 @@
 .signin__buttons a:hover {
     background: var(--color-secondary-a-hover);
 }
+
+.signin__msg {
+    color: var(--color-additional);
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.userinfo div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.userinfo div:first-child img {
+    width: 48px;
+    border-radius: 8px;
+}
+
+.userinfo button {
+    width: 100%;
+    font-size: 0.8em;
+    background: var(--color-secondary-b);
+    color: var(--color-white-1);
+}
