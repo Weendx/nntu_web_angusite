@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!userService.currentUser">
     <div class="signup__group-fields">
         <label for="singup__username">Имя пользователя</label>
         <div>
@@ -72,3 +72,21 @@
     </div>
     <div class="spacing_size_m"></div>
 </form>
+<div class="signup__success" *ngIf="isRegistered && userService.currentUser">
+    <div><img src="/assets/img/status-ok.png" alt="Регистрация завершена" width="128"></div>
+    <div class="spacing_size_m"></div>
+    <div>
+        <h4>Вы успешно зарегистрировались!</h4>
+        <div class="spacing_size_sm"></div>
+        <p>Поздравляем</p>
+    </div>
+</div>
+<div class="signup__success" *ngIf="userService.currentUser && !isRegistered">
+    <div><img src="/assets/img/status-info.png" alt="Регистрация завершена" width="128"></div>
+    <div class="spacing_size_m"></div>
+    <div>
+        <h4>Вы уже зарегистрированы!</h4>
+        <div class="spacing_size_sm"></div>
+        <p>Необходимо выйти, чтобы зарегистрировать новый аккаунт</p>
+    </div>
+</div>

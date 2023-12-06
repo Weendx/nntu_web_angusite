@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { IUser } from '../../models/user';
 
 
 const checkIsPasswordsEqual: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -26,6 +28,9 @@ export class RegistrationFormComponent implements OnInit {
   };
   public formErrorMessage: string = '';
   public isFormSubmitted = false;
+  public isRegistered = false;
+
+  constructor( public userService: UserService ) {}
 
   public ngOnInit(): void {
     this.form = new FormGroup({
@@ -53,7 +58,7 @@ export class RegistrationFormComponent implements OnInit {
       captchaCheck: new FormControl<boolean>(false, [
         Validators.requiredTrue
       ])
-    })
+    })    
   }
 
   get username(): FormControl {
@@ -109,7 +114,38 @@ export class RegistrationFormComponent implements OnInit {
       this.classes.formErrorMsg.pop();
       setTimeout(() => this.classes.formErrorMsg.push('signup_hide'), 3500);
       setTimeout(() => this.formErrorMessage = '', 4000);
+      return;
     }
+    // form should be valid here...
+    const user: IUser = {
+      name: this.username.value,
+      email: this.email.value,
+      ava: "https://api.dicebear.com/7.x/initials/svg?seed="+encodeURI(this.username.value),
+      balance: 0,
+      password: this.password.value,
+      controlQuestion: this.getQuestionByKey(this.question.value),
+      controlAnswer: this.answer.value
+    };
+
+    this.userService.create(user).subscribe((user) => {
+      console.log(user);
+      window.sessionStorage.setItem('userId', String(user.id));
+      this.isRegistered = true;
+      this.form.reset();
+    });
+  }
+
+  public getQuestionByKey(key: string): string {
+    const questions: {[key: string]: string} = {
+      "q1-mailindex": "Почтовый индекс ваших родителей",
+      "q2-maidenname": "Девичья фамилия матери",
+      "q3-carmodel": "Модель вашей первой машины",
+      "q4-author": "Любимый писатель",
+      "q5-petname": "Кличка домашнего животного",
+      "q6-profession": "Профессия вашего дедушки",
+      "q7-favdish": "Любимое блюдо"
+    }
+    return questions[key];
   }
 }
 

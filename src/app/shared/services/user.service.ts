@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { IUser } from '../models/user';
 
 @Injectable({
@@ -32,6 +32,17 @@ export class UserService {
     );
   }
 
+  public getByEmail(email: string): Observable<IUser[]> {
+    return this.http.get<IUser[]>(this.url+'/users', {
+      params: new HttpParams({ fromObject: { email: email } })
+    }).pipe(
+      tap((user) => {
+        if (user.length > 0)
+          this.user = user[0];
+      })
+    );
+  }
+
   public getById(id: number | string): Observable<IUser> {
     return this.http.get<IUser>(this.url + '/users/' + id).pipe(
       tap((user) => this.user = user)
@@ -39,7 +50,12 @@ export class UserService {
   }
 
   public create(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(this.url+'/users', user);
+    return this.http.post<IUser>(this.url+'/users', user).pipe(
+      tap((user) => {
+        if (user)
+          this.user = user;
+      })
+    );
   }
 
   public logout() {
