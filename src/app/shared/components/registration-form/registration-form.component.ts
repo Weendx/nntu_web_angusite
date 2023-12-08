@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { IUser } from '../../models/user';
-import { equalToValidator } from '../../validators';
+import { equalToValidator, valueExistsValidator } from '../../validators';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -25,18 +27,20 @@ export class RegistrationFormComponent implements OnInit {
 
   public ngOnInit(): void {
     this.form = new FormGroup({
-      username: new FormControl<string>('', [
-        Validators.required, Validators.minLength(3)
-      ]),
+      username: new FormControl<string>('', 
+        [ Validators.required, Validators.minLength(3) ], 
+        valueExistsValidator((val) => this.userService.checkUsername(val))
+      ),
       password: new FormControl<string>('', [
         Validators.required, Validators.minLength(8)
       ]),
       passwordRepeat: new FormControl<string>('', [
         Validators.required, equalToValidator('password')
       ]),
-      email: new FormControl<string>('', [
-        Validators.required, Validators.email
-      ]),
+      email: new FormControl<string>('', 
+        [ Validators.required, Validators.email ],
+        valueExistsValidator((val) => this.userService.checkEmail(val))
+      ),
       question: new FormControl<string>('', [
         Validators.required
       ]),
@@ -114,29 +118,33 @@ export class RegistrationFormComponent implements OnInit {
       ava: "https://api.dicebear.com/7.x/initials/svg?seed="+encodeURI(this.username.value),
       balance: 0,
       password: this.password.value,
-      controlQuestion: this.getQuestionByKey(this.question.value),
+      controlQuestion: this.question.value,
       controlAnswer: this.answer.value
     };
 
-    this.userService.create(user).subscribe((user) => {
+    this.userService.create(user).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.formErrorMessage = 'Проблема с подключением к серверу';
+        this.classes.formErrorMsg.pop();
+        setTimeout(() => this.classes.formErrorMsg.push('signup_hide'), 3500);
+        setTimeout(() => this.formErrorMessage = '', 4000);
+        return throwError(() => error.message);
+      })
+    ).subscribe((user) => {
       console.log(user);
+      if (!user) {
+        this.formErrorMessage = 'Ошибка при создании учетной записи, обратитесь к администрации';
+        this.classes.formErrorMsg.pop();
+        setTimeout(() => this.classes.formErrorMsg.push('signup_hide'), 3500);
+        setTimeout(() => this.formErrorMessage = '', 4000);
+        return;
+      }
       window.sessionStorage.setItem('userId', String(user.id));
       this.isRegistered = true;
       this.form.reset();
+      this.isFormSubmitted = false;
     });
   }
 
-  public getQuestionByKey(key: string): string {
-    const questions: {[key: string]: string} = {
-      "q1-mailindex": "Почтовый индекс ваших родителей",
-      "q2-maidenname": "Девичья фамилия матери",
-      "q3-carmodel": "Модель вашей первой машины",
-      "q4-author": "Любимый писатель",
-      "q5-petname": "Кличка домашнего животного",
-      "q6-profession": "Профессия вашего дедушки",
-      "q7-favdish": "Любимое блюдо"
-    }
-    return questions[key];
-  }
 }
 
