@@ -11,8 +11,8 @@ export class FormMessage {
     this.hidden = false;
     clearTimeout(this._timeoutIds.text);
     clearTimeout(this._timeoutIds.class);
-    this._timeoutIds.text = window.setTimeout(() => this.hidden = true, this.timeout);
-    this._timeoutIds.class = window.setInterval(() => this._text = '', this.timeout + 500);
+    this._timeoutIds.class = window.setTimeout(() => this.hidden = true, this.timeout);
+    this._timeoutIds.text = window.setTimeout(() => this._text = '', this.timeout + 500);
   }
   get text(): string {
     return this._text ? this._text : '';
