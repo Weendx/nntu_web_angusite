@@ -73,4 +73,14 @@ export class UserService {
     window.sessionStorage.clear();
     delete this.user;    
   }
+
+  public getRole(user: IUser): string {
+    if (!user.role)
+      return "Игрок";
+    if (user.role >= 0 && user.role < 10)
+      return "Игрок";
+    if (user.role > 10)
+      return "Администратор";
+    return "Супермен";
+  }
 }
