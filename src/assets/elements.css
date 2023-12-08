@@ -15,9 +15,9 @@ select,
 }
 
 input:focus-visible,
-select:focus-visible {
+select:focus-visible,
+.form-field:focus-visible {
   outline: var(--color-white-3) auto 1px;
-
 }
 
 
