@@ -1,0 +1,15 @@
+input {
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    font-size: 0.8em;
+    margin-top: 0.9rem;
+    background: var(--color-secondary-a);
+    color: var(--color-white-1);
+}
+
+button:hover {
+    background: var(--color-secondary-a-hover);
+}

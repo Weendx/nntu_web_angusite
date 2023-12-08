@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'lk', pathMatch: 'full', 
     loadChildren: () => import('./pages/lk/lk.module').then((m) => m.LkModule)
+  },
+  {
+    path: 'news', pathMatch: 'full', 
+    loadChildren: () => import('./pages/news/news.module').then((m) => m.NewsModule)
   }
 ];
 
