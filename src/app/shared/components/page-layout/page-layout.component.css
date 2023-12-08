@@ -24,3 +24,7 @@
     flex-direction: column;
     gap: 3rem;
 }
+
+.page-layout_reversed {
+    flex-direction: row-reverse;
+}

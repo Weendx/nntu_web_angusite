@@ -1,4 +1,4 @@
-<div class="page-layout">
+<div class="page-layout" [ngClass]="{'page-layout_reversed': this.reversed}">
     <article>
         <ng-content select="[slot=article]"></ng-content>
     </article>
