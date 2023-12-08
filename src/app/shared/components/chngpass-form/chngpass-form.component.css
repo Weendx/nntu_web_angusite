@@ -41,3 +41,23 @@
 .chngpass__group-submit input[type=submit]:hover {
     background: var(--color-secondary-b-hover);
 }
+
+.chngpass__group-msg {
+    display: flex;
+    justify-content: center;
+}
+
+.chngpass__group-msg p {
+    color: var(--color-red-1);
+    font-size: 0.8em;
+    transition: 0.8s;
+    position: absolute;
+}
+
+.chngpass__group-msg .msg_hide {
+    opacity: 0;
+}
+
+.chngpass__group-msg .msg_status_success {
+    color: var(--color-green-1);
+}

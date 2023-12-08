@@ -1,31 +1,55 @@
-<form [formGroup]="form" (ngSubmit)="submit" #ngform="ngForm">
+<form [formGroup]="form" (ngSubmit)="submit()">
     <div class="chngpass__group-fields">
+        <label for="chngpass__login">Ваш логин</label>
+        <div>
+            <input type="text" id="chngpass__login" formControlName="login">
+            <p *ngIf="(login.touched || isFormSubmitted) && login.hasError('required')">* Введите логин</p>
+        </div>
         <label for="chngpass__newPassword">Новый пароль</label>
         <div>
             <input type="password" id="chngpass__newPassword" formControlName="newPassword">
-            <p *ngIf="(newPassword.touched || ngform.submitted) && newPassword.hasError('required')">* Введите новый
+            <p *ngIf="(newPassword.touched || isFormSubmitted) && newPassword.hasError('required')">* Введите новый
                 пароль</p>
+            <p *ngIf="newPassword.touched && newPassword.hasError('minlength')">
+                * Минимальная длина: {{ newPassword.errors?.minlength?.requiredLength }}</p>
         </div>
         <label for="chngpass__newPasswordRepeat">Повтор пароля</label>
         <div>
             <input type="password" id="chngpass__newPasswordRepeat" formControlName="newPasswordRepeat">
-            <p *ngIf="(newPasswordRepeat.touched || ngform.submitted) && newPasswordRepeat.hasError('required')">*
+            <p *ngIf="(newPasswordRepeat.touched || isFormSubmitted) && newPasswordRepeat.hasError('required')">*
                 Повторите пароль</p>
-            <p *ngIf="(newPasswordRepeat.touched || ngform.submitted) && newPasswordRepeat.hasError('equalTo')">* Пароли
+            <p *ngIf="(newPasswordRepeat.touched || isFormSubmitted) && newPasswordRepeat.hasError('equalTo')">* Пароли
                 не совпадают</p>
         </div>
         <span>Контрольный вопрос</span>
-        <span id="chngpass__question" class="form-field">Почтовый индекс ваших родителей</span>
+        <div>
+            <select id="signup__question" formControlName="question">
+                <option value="q0" disabled selected>Контрольный вопрос</option>
+                <option value="q1-mailindex">Почтовый индекс ваших родителей</option>
+                <option value="q2-maidenname">Девичья фамилия матери</option>
+                <option value="q3-carmodel">Модель вашей первой машины</option>
+                <option value="q4-author">Любимый писатель</option>
+                <option value="q5-petname">Кличка домашнего животного</option>
+                <option value="q6-profession">Профессия вашего дедушки</option>
+                <option value="q7-favdish">Любимое блюдо</option>
+            </select>
+            <p *ngIf="(question.touched || isFormSubmitted) && question.hasError('required')">* Выберите контрольный
+                вопрос</p>
+        </div>
         <label for="chngpass__answer">Ответ</label>
         <div>
             <input type="text" id="chngpass__answer" formControlName="answer">
-            <p *ngIf="(answer.touched || ngform.submitted) && answer.hasError('required')">* Введите ответ на
+            <p *ngIf="(answer.touched || isFormSubmitted) && answer.hasError('required')">* Введите ответ на
                 контрольный вопрос</p>
         </div>
     </div>
     <div class="spacing_size_l"></div>
     <div class="chngpass__group-submit">
         <input type="submit" value="Изменить пароль">
+    </div>
+    <div class="chngpass__group-msg">
+        <p [ngClass]="{'msg_hide': this.formMsg.hidden, 'msg_status_success': this.formMsg.status == 'success'}">
+            {{ this.formMsg.text }}</p>
     </div>
     <div class="spacing_size_m"></div>
 </form>
