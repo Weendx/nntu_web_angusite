@@ -11,13 +11,12 @@
 }
 
 body {
-  min-height: 100svh;
   background: var(--color-background);
 }
 
 app-root {
-  height: 100%;
   display: flex;
+  min-height: 100svh;
   flex-direction: column;
 }
 
