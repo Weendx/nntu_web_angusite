@@ -79,7 +79,7 @@ export class UserService {
       return "Игрок";
     if (user.role >= 0 && user.role < 10)
       return "Игрок";
-    if (user.role > 10)
+    if (user.role >= 10)
       return "Администратор";
     return "Супермен";
   }
