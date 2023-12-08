@@ -24,29 +24,33 @@ export class UserService {
       params: new HttpParams({
         fromObject: { name: login }
       })
-    }).pipe(
-      tap((user) => {
-        if (user.length > 0) 
-          this.user = user[0];
-      })
-    );
+    });
   }
 
   public getByEmail(email: string): Observable<IUser[]> {
     return this.http.get<IUser[]>(this.url+'/users', {
       params: new HttpParams({ fromObject: { email: email } })
-    }).pipe(
-      tap((user) => {
-        if (user.length > 0)
-          this.user = user[0];
-      })
-    );
+    });
   }
 
   public getById(id: number | string): Observable<IUser> {
-    return this.http.get<IUser>(this.url + '/users/' + id).pipe(
-      tap((user) => this.user = user)
-    )
+    return this.http.get<IUser>(this.url + '/users/' + id);
+  }
+
+  public checkEmail(email: string): Observable<boolean> {
+    return this.http.get<IUser[]>(this.url+'/users', {
+      params: new HttpParams({ fromObject: { email: email } })
+    }).pipe(
+      map((user) => user.length > 0 ? true : false)
+    );
+  }
+
+  public checkUsername(username: string): Observable<boolean> {
+    return this.http.get<IUser[]>(this.url+'/users', {
+      params: new HttpParams({ fromObject: { name: username } })
+    }).pipe(
+      map((user) => user.length > 0 ? true : false)
+    );
   }
 
   public create(user: IUser): Observable<IUser> {
@@ -56,6 +60,11 @@ export class UserService {
           this.user = user;
       })
     );
+  }
+
+  public updatePassword(user: IUser, newPassword: string): Observable<IUser> {
+    user.password = newPassword;
+    return this.http.put<IUser>(`${this.url}/users/${user.id}`, user);
   }
 
   public logout() {
