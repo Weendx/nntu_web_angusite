@@ -1,0 +1,44 @@
+<app-container class="lk__nologin" *ngIf="!this.userService.currentUser">
+    <div><img src="/assets/img/status-info.png" alt="Необходимо авторизоваться" width="128"></div>
+    <div>
+        <h4>Нет доступа</h4>
+        <p>Личный кабинет недоступен без авторизации</p>
+    </div>
+</app-container>
+<app-page-layout *ngIf="this.userService.currentUser" reversed="reversed">
+    <div slot="article">
+        <app-container header="Личный кабинет">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque sapiente voluptatibus temporibus. Nemo
+            necessitatibus deserunt ipsam nam enim eveniet consectetur ut voluptatem, expedita itaque voluptate facere.
+            Similique beatae cupiditate dolores.
+        </app-container>
+        <app-container>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum ipsam quia totam omnis molestiae saepe cum
+            facere eum iusto! Sequi doloribus alias, optio voluptas ea eius eum doloremque id porro?
+        </app-container>
+        <app-container>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat recusandae a assumenda minima provident
+            fugiat, dignissimos explicabo omnis ad mollitia quas nulla asperiores at alias neque dolorum laudantium
+            blanditiis sunt?
+            Vero minus libero expedita, dignissimos ad accusamus ut optio rem sit inventore. Aspernatur consequuntur
+            reprehenderit voluptates! Magni odit ipsa quos dignissimos iusto nisi laudantium exercitationem, mollitia
+            pariatur vitae facere praesentium!
+        </app-container>
+    </div>
+    <div slot="aside">
+        <app-container header="Кабинет пользователя" class="userinfo">
+            <div class="userinfo__person">
+                <img [src]="this.userService.currentUser.ava" alt="User profile picture">
+                <p>{{ this.userService.currentUser.name }}</p>
+            </div>
+            <div class="userinfo__stats">
+                <p>Баланс: {{ this.userService.currentUser.balance }} у.е.</p>
+                <p>Уровень: {{ this.userService.getRole(this.userService.currentUser) }}</p>
+            </div>
+        </app-container>
+        <app-container style="background: none;" class="user-actions">
+            <a routerLink="/reset-password">Сбросить пароль</a>
+            <a (click)="this.userService.logout()">Выйти</a>
+        </app-container>
+    </div>
+</app-page-layout>

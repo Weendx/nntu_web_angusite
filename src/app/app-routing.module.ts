@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'reset-password', pathMatch: 'full', 
     loadChildren: () => import('./pages/reset-password/reset-password.module').then((m) => m.ResetPasswordModule)
+  },
+  {
+    path: 'lk', pathMatch: 'full', 
+    loadChildren: () => import('./pages/lk/lk.module').then((m) => m.LkModule)
   }
 ];
 
