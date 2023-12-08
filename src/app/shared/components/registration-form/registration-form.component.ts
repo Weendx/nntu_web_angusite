@@ -114,6 +114,7 @@ export class RegistrationFormComponent implements OnInit {
       name: this.username.value,
       email: this.email.value,
       ava: "https://api.dicebear.com/7.x/initials/svg?seed="+encodeURI(this.username.value),
+      role: 0,
       balance: 0,
       password: this.password.value,
       controlQuestion: this.question.value,
