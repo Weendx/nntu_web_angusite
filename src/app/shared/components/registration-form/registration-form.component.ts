@@ -5,6 +5,7 @@ import { IUser } from '../../models/user';
 import { equalToValidator, valueExistsValidator } from '../../validators';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormMessage } from '../../common';
 
 
 @Component({
@@ -14,12 +15,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RegistrationFormComponent implements OnInit {
   public form!: FormGroup;
+  public formMsg!: FormMessage;
   public classes: {[key: string]: string[]} = {
     'rulesCheck': [],
-    'captchaCheck': [],
-    'formErrorMsg': ['signup_hide']
+    'captchaCheck': []
   };
-  public formErrorMessage: string = '';
   public isFormSubmitted = false;
   public isRegistered = false;
 
@@ -53,7 +53,8 @@ export class RegistrationFormComponent implements OnInit {
       captchaCheck: new FormControl<boolean>(false, [
         Validators.requiredTrue
       ])
-    })    
+    })
+    this.formMsg = new FormMessage(4000);
   }
 
   get username(): FormControl {
@@ -105,10 +106,7 @@ export class RegistrationFormComponent implements OnInit {
     console.log(this.form, this.classes);
     if (this.form.invalid) {
       console.log('form invalid');
-      this.formErrorMessage = 'Проверьте правильность заполнения полей формы';
-      this.classes.formErrorMsg.pop();
-      setTimeout(() => this.classes.formErrorMsg.push('signup_hide'), 3500);
-      setTimeout(() => this.formErrorMessage = '', 4000);
+      this.formMsg.show('Проверьте правильность заполнения полей формы');
       return;
     }
     // form should be valid here...
@@ -124,19 +122,13 @@ export class RegistrationFormComponent implements OnInit {
 
     this.userService.create(user).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.formErrorMessage = 'Проблема с подключением к серверу';
-        this.classes.formErrorMsg.pop();
-        setTimeout(() => this.classes.formErrorMsg.push('signup_hide'), 3500);
-        setTimeout(() => this.formErrorMessage = '', 4000);
+        this.formMsg.show('Проблема с подключением к серверу');
         return throwError(() => error.message);
       })
     ).subscribe((user) => {
       console.log(user);
       if (!user) {
-        this.formErrorMessage = 'Ошибка при создании учетной записи, обратитесь к администрации';
-        this.classes.formErrorMsg.pop();
-        setTimeout(() => this.classes.formErrorMsg.push('signup_hide'), 3500);
-        setTimeout(() => this.formErrorMessage = '', 4000);
+        this.formMsg.show('Ошибка при создании учетной записи, обратитесь к администрации');
         return;
       }
       window.sessionStorage.setItem('userId', String(user.id));

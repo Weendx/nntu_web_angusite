@@ -72,7 +72,7 @@
         <input type="submit" value="Регистрация">
     </div>
     <div class="signup__group-msg">
-        <p [ngClass]="classes.formErrorMsg">{{ formErrorMessage }}</p>
+        <p [ngClass]="{'signup_hide': formMsg.hidden}">{{ formMsg.text }}</p>
     </div>
     <div class="spacing_size_m"></div>
 </form>
