@@ -14,7 +14,9 @@ export class UserService {
   get currentUser(): IUser | undefined {
     let userId = window.sessionStorage.getItem('userId')
     if (userId && !this.user) {
-      this.getById(userId).pipe(retry(2)).subscribe();
+      this.getById(userId).subscribe(
+        (user) => this.user = user
+      );
     }
     return this.user;
   }
