@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, retry, tap } from 'rxjs';
 import { IUser } from '../models/user';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class UserService {
   get currentUser(): IUser | undefined {
     let userId = window.sessionStorage.getItem('userId')
     if (userId && !this.user) {
-      this.getById(userId).subscribe();
+      this.getById(userId).pipe(retry(2)).subscribe();
     }
     return this.user;
   }
