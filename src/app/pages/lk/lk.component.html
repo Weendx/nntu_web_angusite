@@ -7,14 +7,39 @@
 </app-container>
 <app-page-layout *ngIf="this.userService.currentUser" reversed="reversed">
     <div slot="article">
-        <app-container header="Личный кабинет">
+        <app-container header="История обращений в техподдержку">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque sapiente voluptatibus temporibus. Nemo
             necessitatibus deserunt ipsam nam enim eveniet consectetur ut voluptatem, expedita itaque voluptate facere.
             Similique beatae cupiditate dolores.
         </app-container>
-        <app-container>
+        <app-container header="Пополнить счет">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum ipsam quia totam omnis molestiae saepe cum
             facere eum iusto! Sequi doloribus alias, optio voluptas ea eius eum doloremque id porro?
+        </app-container>
+        <app-container header="Добавить новую запись" class="lk__addpost" *ngIf="this.userService.currentUser.role > 9">
+            <form (ngSubmit)="addPost()">
+                <div class="addpost__field">
+                    <label for="addpost__field-header">Заголовок</label>
+                    <input type="text" id="addpost__field-header" [(ngModel)]="postData.header" name="header"
+                        required="">
+                </div>
+                <div class="addpost__field">
+                    <label for="addpost__field-bodyPreview">Краткое содержание</label>
+                    <textarea id="addpost__field-bodyPreview" cols="50" rows="5" class="form-field"
+                        [(ngModel)]="postData.bodyPreview" name="bodyPreview" required=""></textarea>
+                </div>
+                <div class="addpost__field">
+                    <label for="addpost__field-body">Полное содержание</label>
+                    <textarea id="addpost__field-body" cols="50" rows="10" class="form-field"
+                        [(ngModel)]="postData.body" name="body" required=""></textarea>
+                </div>
+                <div class="addpost__msg">
+                    <p *ngIf="postData.formMsg"><span>({{ postData.formMsgId }}) </span>{{ postData.formMsg }}</p>
+                </div>
+                <div class="addpost__submit">
+                    <input type="submit" value="Добавить запись">
+                </div>
+            </form>
         </app-container>
         <app-container>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat recusandae a assumenda minima provident
