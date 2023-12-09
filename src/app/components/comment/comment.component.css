@@ -27,7 +27,9 @@
 }
 
 .comment__actions {
-    padding-left: 1rem;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
 }
 
 .comment__actions button {
@@ -41,4 +43,12 @@
 
 .comment__actions button:hover {
     color: var(--color-additional-d);
+}
+
+.actions__edit>* {
+    margin-left: 1rem;
+}
+
+.actions__edit {
+    font-size: 0.9em;
 }
