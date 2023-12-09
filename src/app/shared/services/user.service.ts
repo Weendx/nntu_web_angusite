@@ -21,6 +21,10 @@ export class UserService {
     return this.user;
   }
 
+  public isLoggedIn(): boolean {
+    return window.sessionStorage.getItem('userId') ? true : false;
+  }
+
   public getByName(login: string): Observable<IUser[]> {
     return this.http.get<IUser[]>(this.url+'/users', {
       params: new HttpParams({
