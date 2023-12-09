@@ -4,6 +4,7 @@ import { LkComponent } from './lk.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { AddPostComponent } from 'src/app/components/add-post/add-post.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    LkComponent
+    LkComponent,
+    AddPostComponent
   ],
   imports: [
     CommonModule,

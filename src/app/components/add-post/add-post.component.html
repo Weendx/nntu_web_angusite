@@ -1,0 +1,22 @@
+<form (ngSubmit)="addPost()">
+    <div class="addpost__field">
+        <label for="addpost__field-header">Заголовок</label>
+        <input type="text" id="addpost__field-header" [(ngModel)]="postData.header" name="header" required="">
+    </div>
+    <div class="addpost__field">
+        <label for="addpost__field-bodyPreview">Краткое содержание</label>
+        <textarea id="addpost__field-bodyPreview" cols="50" rows="5" class="form-field"
+            [(ngModel)]="postData.bodyPreview" name="bodyPreview" required=""></textarea>
+    </div>
+    <div class="addpost__field">
+        <label for="addpost__field-body">Полное содержание</label>
+        <textarea id="addpost__field-body" cols="50" rows="10" class="form-field" [(ngModel)]="postData.body"
+            name="body" required=""></textarea>
+    </div>
+    <div class="addpost__msg">
+        <p *ngIf="postData.formMsg"><span>({{ postData.formMsgId }}) </span>{{ postData.formMsg }}</p>
+    </div>
+    <div class="addpost__submit">
+        <input type="submit" value="Добавить запись">
+    </div>
+</form>
