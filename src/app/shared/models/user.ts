@@ -3,9 +3,14 @@ export interface IUser {
     name: string,
     email: string,
     ava: string,
-    role: number,
+    role: UserRole,
     balance: number,
     password: string,
     controlQuestion: string,
     controlAnswer: string
+}
+
+export enum UserRole {
+    User = 0,
+    Admin = 10
 }

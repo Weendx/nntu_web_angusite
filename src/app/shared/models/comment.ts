@@ -3,5 +3,7 @@ export interface IComment {
     postId: number,
     userId: number,
     body: string,
-    timestamp: number
+    timestamp: number,
+    updateTimestamp?: number,
+    replyTo?: number
 }
