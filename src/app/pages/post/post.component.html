@@ -1,0 +1,45 @@
+<app-page-layout>
+    <div slot="article">
+        <app-container header="Запись такая-то..." class="post">
+            <div class="post__metadata">
+                <div class="flexgroup">
+                    <div class="metadata__author img-text">
+                        <img src="/assets/img/user.png" width="16">
+                        <span>Пользователь</span>
+                    </div>
+                    <div class="metadata__separator"></div>
+                    <div class="metadata__views img-text">
+                        <img src="/assets/img/eye.png" width="16">
+                        <span>123</span>
+                    </div>
+                </div>
+                <div class="metadata__date">
+                    <span>9 дек. 2023 в 12:00</span>
+                </div>
+            </div>
+            <div class="post__tools">
+                <div class="img-text">
+                    <img src="/assets/img/pen.png" width="16">
+                    <span>Изменить</span>
+                </div>
+                <div class="img-text">
+                    <img src="/assets/img/archive.png" width="16">
+                    <span>Архивировать</span>
+                </div>
+            </div>
+            <div class="post__content">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere blanditiis harum unde corrupti aut,
+                accusamus esse quam in ullam, doloribus sunt, tempora accusantium soluta ratione rerum sequi nostrum sit
+                eius.
+            </div>
+        </app-container>
+        <app-container header="Комментарии">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam perspiciatis commodi, delectus mollitia
+            saepe fugit dolorum culpa blanditiis! Esse nobis totam architecto facere repellat voluptatem maiores ipsum
+            nulla sapiente neque.
+        </app-container>
+    </div>
+    <div slot="aside">
+        <app-monitoring></app-monitoring>
+    </div>
+</app-page-layout>

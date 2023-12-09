@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'downloads', pathMatch: 'full', 
     loadChildren: () => import('./pages/downloads/downloads.module').then((m) => m.DownloadsModule)
+  },
+  {
+    path: 'post', pathMatch: 'full', 
+    loadChildren: () => import('./pages/post/post.module').then((m) => m.PostModule)
   }
 ];
 
