@@ -8,10 +8,11 @@
         <div class="header__nav">
             <nav>
                 <ul>
-                    <li><a href="#" class="current">Главная</a></li>
-                    <li><a href="#">Новости</a></li>
-                    <li><a href="#">Скачать</a></li>
-                    <li><a href="#">Личный кабинет</a></li>
+                    <li><a routerLink="/" [ngClass]="{'current': this.router.url == '/'}">Главная</a></li>
+                    <li><a routerLink="/news" [ngClass]="{'current': this.router.url == '/news'}">Новости</a></li>
+                    <li><a routerLink="/downloads" [ngClass]="{'current': this.router.url == '/downloads'}">Скачать</a>
+                    </li>
+                    <li><a routerLink="/lk" [ngClass]="{'current': this.router.url == '/lk'}">Личный кабинет</a></li>
                 </ul>
             </nav>
         </div>
