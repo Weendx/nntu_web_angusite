@@ -21,7 +21,7 @@ export class UserService {
     return this.user;
   }
 
-  public isLoggedIn(): boolean {
+  get isLoggedIn(): boolean {
     return window.sessionStorage.getItem('userId') ? true : false;
   }
 
