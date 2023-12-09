@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'news', pathMatch: 'full', 
     loadChildren: () => import('./pages/news/news.module').then((m) => m.NewsModule)
+  },
+  {
+    path: 'downloads', pathMatch: 'full', 
+    loadChildren: () => import('./pages/downloads/downloads.module').then((m) => m.DownloadsModule)
   }
 ];
 
