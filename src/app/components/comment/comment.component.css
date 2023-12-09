@@ -1,0 +1,44 @@
+.comment__author {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: var(--color-black-4);
+}
+
+.comment__author img {
+    width: 24px;
+    border-radius: 4px;
+}
+
+.author__name {
+    color: var(--color-black-2);
+    font-size: 0.97em;
+    font-weight: 400;
+}
+
+.author__time {
+    color: #909090;
+    font-size: 0.8em;
+    font-weight: 300;
+}
+
+.comment__body {
+    margin: 1rem 0 0.5rem;
+}
+
+.comment__actions {
+    padding-left: 1rem;
+}
+
+.comment__actions button {
+    background: none;
+    padding: 0;
+    color: var(--color-additional);
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.comment__actions button:hover {
+    color: var(--color-additional-d);
+}
