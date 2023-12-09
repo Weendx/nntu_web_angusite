@@ -1,0 +1,21 @@
+textarea {
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+button {
+    padding: 0.75rem 2rem;
+    /* width: 30%; */
+    color: var(--color-white-1);
+    background: var(--color-main);
+}
+
+.add-comment__submit {
+    text-align: right;
+}
+
+*~ :host {
+    padding: 2rem;
+    display: block;
+}

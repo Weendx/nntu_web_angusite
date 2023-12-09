@@ -4,6 +4,7 @@ import { PostComponent } from './post.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CommentComponent } from 'src/app/components/comment/comment.component';
+import { AddCommentComponent } from 'src/app/components/add-comment/add-comment.component';
 
 const routes: Routes = [
   {path: '', component: PostComponent}
@@ -12,7 +13,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     PostComponent,
-    CommentComponent
+    CommentComponent,
+    AddCommentComponent
   ],
   imports: [
     CommonModule,
