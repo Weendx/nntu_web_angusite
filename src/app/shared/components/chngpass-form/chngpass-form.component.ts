@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { equalToValidator } from '../../validators';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services';
 import { FormMessage } from '../../common';
 
 

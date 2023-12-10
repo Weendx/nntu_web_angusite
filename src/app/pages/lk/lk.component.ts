@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService } from 'src/app/shared/services/user.service';
+import { UserService } from 'src/app/shared/services';
 import { UserRole } from 'src/app/shared/types';
 
 @Component({

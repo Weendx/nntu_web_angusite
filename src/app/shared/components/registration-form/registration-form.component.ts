@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services';
 import { IUser } from '../../models/user';
 import { equalToValidator, valueExistsValidator } from '../../validators';
 import { catchError, throwError } from 'rxjs';

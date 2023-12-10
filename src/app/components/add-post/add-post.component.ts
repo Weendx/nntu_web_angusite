@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IPost } from 'src/app/shared/models/post';
-import { PostService } from 'src/app/shared/services/post.service';
-import { UserService } from 'src/app/shared/services/user.service';
+import { PostService, UserService } from 'src/app/shared/services';
 
 @Component({
   selector: 'lk-add-post',
