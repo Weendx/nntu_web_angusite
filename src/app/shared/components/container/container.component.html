@@ -1,6 +1,6 @@
 <div class="container" [style]="style">
     <div *ngIf="header" class="container__title">
-        <h4>{{header}}</h4>
+        <h4 (click)="onHeaderClick()">{{header}}</h4>
     </div>
     <div class="container__content">
         <ng-content></ng-content>

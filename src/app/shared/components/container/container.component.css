@@ -14,8 +14,18 @@ div.container .container__title {
 div.container .container__title>* {
   color: var(--color-white-1);
   font-weight: 400;
+  display: inline;
 }
 
 div.container .container__content {
   padding: 0.75rem 1.5rem;
+}
+
+:host.type_post .container__title>* {
+  cursor: pointer;
+  transition: 0.05s;
+}
+
+:host.type_post .container__title>*:hover {
+  font-weight: 500;
 }
