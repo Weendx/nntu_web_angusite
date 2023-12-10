@@ -8,7 +8,7 @@ import { Notification, Status } from '../types';
 export class NotificationService {
 
   public message$ = new Subject<string>();
-  public status$ = new Subject<Status | null>();
+  public status$ = new Subject<Status>();
 
   private queue: Notification[] = [];
   private timeoutId: number = 0;
@@ -32,7 +32,7 @@ export class NotificationService {
     if (this.isShowing === false)
       return;
     this.message$.next('');
-    this.status$.next(null);
+    this.status$.next(Status.None);
     this.isShowing = false;
     if (this.queue.length !== 0) {
       const obj = this.queue.shift() as Notification;
@@ -44,7 +44,7 @@ export class NotificationService {
     if (this.isShowing === false)
       return;
     this.message$.next('');
-    this.status$.next(null);
+    this.status$.next(Status.None);
     this.isShowing = false;
     if (this.queue.length !== 0) {
       this.queue.length = 0;
