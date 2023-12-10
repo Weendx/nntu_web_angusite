@@ -4,6 +4,7 @@ import { ContainerComponent } from './components/container/container.component';
 import { PageLayoutComponent } from './components/page-layout/page-layout.component';
 import { MonitoringComponent } from './components/monitoring/monitoring.component';
 import { FilterPostsPipe } from './pipes/filter-posts.pipe';
+import { LoadingComponent } from './components/loading/loading.component';
 
 
 
@@ -12,6 +13,7 @@ import { FilterPostsPipe } from './pipes/filter-posts.pipe';
     ContainerComponent,
     PageLayoutComponent,
     MonitoringComponent,
+    LoadingComponent,
     FilterPostsPipe
   ],
   imports: [
@@ -21,6 +23,7 @@ import { FilterPostsPipe } from './pipes/filter-posts.pipe';
     ContainerComponent,
     PageLayoutComponent,
     MonitoringComponent,
+    LoadingComponent,
     FilterPostsPipe
   ]
 })
