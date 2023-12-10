@@ -38,8 +38,7 @@ export class NotificationComponent implements OnInit {
         }
       }
     );
-    this.notifyService.status$.pipe(
-    ).subscribe(
+    this.notifyService.status$.subscribe(
       (status) => {
           if (this.state === 'state_preclosing' || this.state === 'state_closing') {
             this.timeoutId.status = window.setTimeout(() => {
