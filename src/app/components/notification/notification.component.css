@@ -9,4 +9,37 @@
     box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.2);
     padding: 1rem 2rem;
     border-radius: 8px;
+    display: inline-block;
+}
+
+:host.status_success {
+    background: #0f8d0f;
+}
+
+:host.status_error {
+    background: #931010;
+}
+
+:host.state_opening {
+    animation: fadeIn 1s ease;
+}
+
+:host.state_closing {
+    animation: fadeIn 1s ease reverse;
+}
+
+:host.state_hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        top: 0;
+    }
+
+    to {
+        opacity: 1;
+        top: 1rem;
+    }
 }
