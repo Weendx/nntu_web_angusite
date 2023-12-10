@@ -35,7 +35,7 @@ export class AddPostComponent {
       title: this.postData.header,
       body: this.postData.body,
       bodyPreview: this.postData.bodyPreview,
-      timestamp: Math.floor(Date.now() / 1000),
+      timestamp: Date.now(),
       userId: this.userService.currentUser.id,
       views: 0
     }
