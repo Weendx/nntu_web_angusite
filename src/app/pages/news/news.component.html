@@ -1,21 +1,8 @@
 <app-page-layout>
     <div slot="article">
-        <app-container header="Запись 1">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque sapiente voluptatibus temporibus. Nemo
-            necessitatibus deserunt ipsam nam enim eveniet consectetur ut voluptatem, expedita itaque voluptate facere.
-            Similique beatae cupiditate dolores.
-        </app-container>
-        <app-container header="Запись 2">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum ipsam quia totam omnis molestiae saepe cum
-            facere eum iusto! Sequi doloribus alias, optio voluptas ea eius eum doloremque id porro?
-        </app-container>
-        <app-container header="Запись 3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat recusandae a assumenda minima provident
-            fugiat, dignissimos explicabo omnis ad mollitia quas nulla asperiores at alias neque dolorum laudantium
-            blanditiis sunt?
-            Vero minus libero expedita, dignissimos ad accusamus ut optio rem sit inventore. Aspernatur consequuntur
-            reprehenderit voluptates! Magni odit ipsa quos dignissimos iusto nisi laudantium exercitationem, mollitia
-            pariatur vitae facere praesentium!
+        <app-container *ngFor="let post of posts" [header]="post.title" class="type_post"
+            (headerClick)="toPost(post.id!)">
+            {{ post.bodyPreview }}
         </app-container>
     </div>
     <div slot="aside">
