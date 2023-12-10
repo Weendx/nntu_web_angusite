@@ -14,15 +14,18 @@ export class NotificationService {
   private timeoutId: number = 0;
   private isShowing = false;
 
+  private debounceTime = 1200;
+
   constructor() { }
 
   public send(msg: string, status: Status = Status.Error, duration: number = 1500) {
+    console.log('notification.send', msg, status, duration);
     if (this.isShowing === false) {
       this.message$.next(msg);
       this.status$.next(status);
       this.isShowing = true;
 
-      this.timeoutId = window.setTimeout(this.continue, duration);
+      this.timeoutId = window.setTimeout(() => this.continue(), duration);
     } else {
       this.queue.push({message: msg, status: status, duration: duration})
     }
@@ -34,10 +37,12 @@ export class NotificationService {
     this.message$.next('');
     this.status$.next(Status.None);
     this.isShowing = false;
-    if (this.queue.length !== 0) {
-      const obj = this.queue.shift() as Notification;
-      this.send(obj.message, obj.status, obj.duration);
-    }
+    setTimeout(() => {
+      if (this.queue.length !== 0) {
+        const obj = this.queue.shift() as Notification;
+        this.send(obj.message, obj.status, obj.duration);
+      }
+    }, this.debounceTime);
   }
 
   public clear() {
