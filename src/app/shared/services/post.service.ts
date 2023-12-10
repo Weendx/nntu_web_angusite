@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IPost } from '../models/post';
+import { IPost } from '../models';
 import { Observable, catchError, throwError } from 'rxjs';
 import { NotificationService } from './notification.service';
 

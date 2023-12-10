@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IPost } from 'src/app/shared/models/post';
+import { IPost } from 'src/app/shared/models';
 import { PostService } from 'src/app/shared/services';
 
 @Component({
