@@ -19,7 +19,6 @@ export class NotificationService {
   constructor() { }
 
   public send(msg: string, status: Status = Status.Error, duration: number = 1500) {
-    console.log('notification.send', msg, status, duration);
     if (this.isShowing === false) {
       this.message$.next(msg);
       this.status$.next(status);
