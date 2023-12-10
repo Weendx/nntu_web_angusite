@@ -1,0 +1,12 @@
+:host {
+    top: 1rem;
+    left: 50%;
+    z-index: 2;
+    position: fixed;
+    transform: translateX(-50%);
+    color: var(--color-white-1);
+    background: var(--color-additional-b);
+    box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.2);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+}
