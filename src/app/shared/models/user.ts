@@ -1,3 +1,5 @@
+import { UserRole } from "../types";
+
 export interface IUser {
     id?: number,
     name: string,
@@ -8,9 +10,4 @@ export interface IUser {
     password: string,
     controlQuestion: string,
     controlAnswer: string
-}
-
-export enum UserRole {
-    User = 0,
-    Admin = 10
 }

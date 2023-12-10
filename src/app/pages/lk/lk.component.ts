@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UserRole } from 'src/app/shared/models/user';
 import { UserService } from 'src/app/shared/services/user.service';
+import { UserRole } from 'src/app/shared/types';
 
 @Component({
   selector: 'app-lk',
