@@ -64,11 +64,18 @@ export class ChngpassFormComponent implements OnInit {
                 || user[0].controlAnswer !== this.answer.value) {
           this.formMsg.show('Ошибка в заполнении полей формы: неверные данные');
         } else {
-          this.userService.updatePassword(user[0], this.newPassword.value);
-          console.log(user[0]);
-          this.formMsg.show("Пароль обновлён!", "success");
-          this.form.reset();
-          this.isFormSubmitted = false;
+          this.userService.updatePassword(user[0], this.newPassword.value).subscribe(
+            (user) => {
+              if (user.password === this.newPassword.value) {
+                this.formMsg.show("Пароль обновлён!", "success");
+                this.form.reset();
+                this.isFormSubmitted = false;
+              } else {
+                this.formMsg.show("Что-то пошло не так", "error");
+              }
+            }
+          );
+          
         }
       }
     );
