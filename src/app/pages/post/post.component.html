@@ -1,45 +1,55 @@
-<app-page-layout>
-    <div slot="article">
-        <app-container header="Запись такая-то..." class="post">
+<app-loading *ngIf="!isLoaded"></app-loading>
+<app-page-layout *ngIf="isLoaded && postService.lastPost! as postData">
+    <div slot="article" *ngIf="postData.id! == postId">
+        <app-container header="{{ postData.title }}" class="post">
             <div class="post__metadata">
                 <div class="flexgroup">
                     <div class="metadata__author img-text">
-                        <img src="/assets/img/user.png" width="16">
-                        <span>Пользователь</span>
+                        <!-- <img src="/assets/img/user.png" width="16"> -->
+                        <img [src]="postData.user.ava" width="16">
+                        <span>{{ postData.user.name }}</span>
                     </div>
                     <div class="metadata__separator"></div>
                     <div class="metadata__views img-text">
                         <img src="/assets/img/eye.png" width="16">
-                        <span>123</span>
+                        <span>{{ postData.views }}</span>
                     </div>
                 </div>
                 <div class="metadata__date">
-                    <span>9 дек. 2023 в 12:00</span>
+                    <time [dateTime]="postData.timestamp | date:'YYYY-MM-dd hh:mm'">
+                        {{ postData.timestamp | relativeDate}}
+                    </time>
                 </div>
             </div>
-            <div class="post__tools">
+            <div class="post__tools" *ngIf="postData.userId === currentUser.id || currentUser.isAdmin">
                 <div class="img-text">
                     <img src="/assets/img/pen.png" width="16">
                     <span>Изменить</span>
                 </div>
                 <div class="img-text">
                     <img src="/assets/img/archive.png" width="16">
-                    <span>Архивировать</span>
+                    <span>Удалить</span>
                 </div>
             </div>
             <div class="post__content">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere blanditiis harum unde corrupti aut,
-                accusamus esse quam in ullam, doloribus sunt, tempora accusantium soluta ratione rerum sequi nostrum sit
-                eius.
+                {{ postData.body }}
             </div>
         </app-container>
         <app-container header="Комментарии">
-            <post-comment></post-comment>
-            <post-add-comment></post-add-comment>
-            <post-comment></post-comment>
+            <div *ngFor="let comment of postData.comments">
+                <post-comment-thread 
+                    *ngIf="!comment.replyTo"
+                    [dataComment]="comment" 
+                    [dataCurrentUser]="currentUser"
+                ></post-comment-thread>
+            </div>
+            <div *ngIf="postData.comments.length === 0" class="post__no-comments">
+                <p>Будь первым – оставь комментарий!</p>
+            </div>
         </app-container>
-        <app-container>
-            <post-add-comment></post-add-comment>
+        <app-container *ngIf="currentUser.id !== -1">
+            <post-add-comment [dataCurrentUser]="currentUser" [dataPostId]="postData.id">
+            </post-add-comment>
         </app-container>
     </div>
     <div slot="aside">

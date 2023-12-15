@@ -1,21 +1,59 @@
-<header class="comment__author">
-    <img src="https://api.dicebear.com/7.x/initials/svg?seed=pda0" alt="Изображение профиля">
-    <span class="author__name">pda0</span>
-    <span class="author__time">3 часа назад</span>
-</header>
-<div class="comment__body">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam perspiciatis commodi,
-    delectus mollitia
-    saepe fugit dolorum culpa blanditiis! Esse nobis totam architecto facere repellat voluptatem maiores
-    ipsum
-    nulla sapiente neque.
+<div *ngIf="!isLoaded">
+    Loading...
 </div>
-<footer class="comment__actions">
-    <div>
-        <button>Ответить</button>
+<div *ngIf="isLoaded && dataComment.isDeleted && dataComment.isRoot && dataHasReplies">
+    <header class="comment__author">
+        <span class="author__ava-placeholder"></span>
+        <span class="author__name">&lt;......&gt;</span>
+    </header>
+    <div class="comment__body">
+        <span class="body__deleted">Комментарий удалён</span>
     </div>
-    <div class="actions__edit">
-        <button>Удалить</button>
-        <button>Изменить</button>
+    <div class="spacing_size_m"></div>
+</div>
+<div *ngIf="isLoaded && !dataComment.isDeleted">
+    <header class="comment__author">
+        <img [src]="user!.ava" alt="Изображение профиля">
+        <span class="author__name">{{ user!.name }}</span>
+        <span class="author__time">{{ dataComment.timestamp | relativeDate }}</span>
+        <span class="author__time author__updateTime" *ngIf="dataComment.updateTimestamp"
+        >изменено {{ dataComment.updateTimestamp | relativeDate }}
+        </span>
+    </header>
+    <div class="comment__body" *ngIf="!isEditing">
+        {{ dataComment.body }}
     </div>
-</footer>
+    <div class="comment__body" *ngIf="isEditing">
+        <textarea 
+            name="comment_body" 
+            id="comment_body" 
+            class="form-field" 
+            [(ngModel)]="editFields.body"
+            rows="5"
+        >
+        </textarea>
+    </div>
+    <footer class="comment__actions" *ngIf="dataCurrentUser?.id !== -1">
+        <div>
+            <button *ngIf="!dataComment.replyTo && !isEditing" (click)="toggleAnswer()">Ответить</button>
+        </div>
+        <div class="actions__edit">
+            <span *ngIf="dataCurrentUser?.id === dataComment.userId || dataCurrentUser?.isAdmin">
+                <button *ngIf="!isEditing" (click)="onDelete()">
+                    Удалить
+                </button>
+            </span>
+            <span *ngIf="dataCurrentUser?.id === dataComment.userId">
+                <button *ngIf="!isEditing" (click)="edit()">
+                    Изменить
+                </button>
+                <button *ngIf="isEditing" (click)="stopEdit()">
+                    Сохранить
+                </button>
+                <button *ngIf="isEditing" (click)="cancelEdit()">
+                    Отмена
+                </button>
+            </span>
+        </div>
+    </footer>
+</div>

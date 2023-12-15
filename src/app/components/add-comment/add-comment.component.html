@@ -1,4 +1,14 @@
-<textarea name="" id="" placeholder="Текст комментария" class="form-field" rows="3"></textarea>
+<textarea 
+    *ngIf="dataReplyTo ? '_body_' + dataReplyTo : '_body' as postfix"
+    class="form-field add-comment_body" 
+    [id]="'add-comment' + postfix" 
+    [name]="'add-comment' + postfix" 
+    placeholder="Текст комментария"
+    rows="5"
+    [(ngModel)]="commentBody"
+    (keypress)="onSendShortcutPress($event)"
+>
+</textarea>
 <div class="add-comment__submit">
-    <button>Добавить комментарий</button>
+    <button (click)="add()">Добавить комментарий</button>
 </div>

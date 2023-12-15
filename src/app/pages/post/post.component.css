@@ -16,6 +16,10 @@
     color: var(--color-black-4);
 }
 
+.metadata__author img {
+    border-radius: 2px;
+}
+
 .metadata__separator::after {
     content: '/';
     padding: 0 1rem;
@@ -40,4 +44,10 @@
 
 .post__content {
     margin-top: 0.7rem;
+}
+
+.post__no-comments {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--color-white-5);
 }

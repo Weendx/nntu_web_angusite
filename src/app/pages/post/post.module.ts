@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CommentComponent } from 'src/app/components/comment/comment.component';
 import { AddCommentComponent } from 'src/app/components/add-comment/add-comment.component';
+import { CommentThreadComponent } from 'src/app/components/comment-thread/comment-thread.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {path: '', component: PostComponent}
@@ -14,11 +16,13 @@ const routes: Routes = [
   declarations: [
     PostComponent,
     CommentComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    CommentThreadComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     RouterModule.forChild(routes)
   ]
 })

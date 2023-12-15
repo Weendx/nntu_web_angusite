@@ -10,6 +10,13 @@
     border-radius: 4px;
 }
 
+.comment__author .author__ava-placeholder {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    background: var(--color-white-3);
+}
+
 .author__name {
     color: var(--color-black-2);
     font-size: 0.97em;
@@ -22,8 +29,20 @@
     font-weight: 300;
 }
 
+.author__updateTime::before {
+    content: '•';
+    margin-right: 0.5rem;
+}
+
 .comment__body {
     margin: 1rem 0 0.5rem;
+    white-space: pre-line;  /* allowing \n */
+}
+
+.body__deleted {
+    font-size: 0.9em;
+    font-style: italic;
+    color: var(--color-white-5);
 }
 
 .comment__actions {
@@ -45,10 +64,22 @@
     color: var(--color-additional-d);
 }
 
-.actions__edit>* {
+.actions__edit button {
     margin-left: 1rem;
 }
 
 .actions__edit {
     font-size: 0.9em;
+}
+
+:host {
+    display: block;
+}
+
+:host.reply {
+    margin-left: 1rem;
+}
+
+.form-field { 
+    width: 100%;
 }

@@ -1,0 +1,21 @@
+<post-comment 
+    [dataComment]="dataComment" 
+    [dataCurrentUser]="dataCurrentUser"
+    [dataHasReplies]="replies.length > 0"
+    (wantanswer)="onReplyClick()"
+    (deleted)="onRootDelete($event)"
+></post-comment>
+<post-comment 
+    *ngFor="let comment of replies"
+    [dataComment]="comment"
+    [dataCurrentUser]="dataCurrentUser"
+    class="reply"
+    (deleted)="onReplyDelete($event)"
+></post-comment>
+<post-add-comment 
+    *ngIf="isWantReply"
+    [dataCurrentUser]="dataCurrentUser!" 
+    [dataPostId]="dataComment.postId"
+    [dataReplyTo]="dataComment.id"
+    (create)="onReplyAdded($event)"
+></post-add-comment>

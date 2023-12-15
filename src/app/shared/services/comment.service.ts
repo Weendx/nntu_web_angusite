@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, mergeMap } from 'rxjs';
 import { IComment } from '../models';
 
 @Injectable({
@@ -32,4 +32,25 @@ export class CommentService {
     return this.http.put<IComment>(this.url + `/comments/${id}`, updatedComment);
   }
 
+  public delete(id: number): Observable<IComment | Object> {
+    return this.getById(id).pipe(
+      mergeMap((comment: IComment) => {
+        const patch = {
+          isDeleted: true,
+          body: "<deleted>"
+        };
+        if (comment.isRoot)
+          return this.http.patch<IComment>(this.url + `/comments/${id}`, patch);
+        else
+          return this.http.delete(this.url + `/comments/${id}`);
+      })
+    ); 
+  }
+
+  public transformToDeleted(comment: IComment): IComment {
+    const copy = structuredClone(comment);
+    copy.isDeleted = true;
+    copy.body = "<deleted>";
+    return copy;
+  }
 }
