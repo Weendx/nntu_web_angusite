@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, map, retry, tap } from 'rxjs';
+import { Observable, map, of, retry, tap } from 'rxjs';
 import { IUser } from '../models';
 
 @Injectable({
@@ -19,6 +19,23 @@ export class UserService {
       );
     }
     return this.user;
+  }
+
+  get currentUser$(): Observable<IUser | null> {
+    let userId = window.sessionStorage.getItem('userId')
+    if (!userId)
+      return of(null);
+    if (userId && (this.user?.id !== Number(userId))) {
+      return this.getById(userId).pipe(
+        map(
+          (user) => {
+            this.user = user;
+            return user;
+          }
+        )
+      );
+    }
+    return of(this.user!);
   }
 
   get isLoggedIn(): boolean {
