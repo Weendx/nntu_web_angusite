@@ -5,6 +5,7 @@ import { PageLayoutComponent } from './components/page-layout/page-layout.compon
 import { MonitoringComponent } from './components/monitoring/monitoring.component';
 import { FilterPostsPipe } from './pipes/filter-posts.pipe';
 import { LoadingComponent } from './components/loading/loading.component';
+import { RelativeDatePipe } from './pipes/relative-date.pipe';
 
 
 
@@ -14,7 +15,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     PageLayoutComponent,
     MonitoringComponent,
     LoadingComponent,
-    FilterPostsPipe
+    FilterPostsPipe,
+    RelativeDatePipe
   ],
   imports: [
     CommonModule
@@ -24,7 +26,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     PageLayoutComponent,
     MonitoringComponent,
     LoadingComponent,
-    FilterPostsPipe
+    FilterPostsPipe,
+    RelativeDatePipe
   ]
 })
 export class SharedModule { }
