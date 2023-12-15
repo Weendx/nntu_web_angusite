@@ -29,7 +29,7 @@
         <div>
             <input type="email" id="signup__email" placeholder="Email адрес" formControlName="email">
             <p *ngIf="(email.touched || isFormSubmitted) && email.hasError('required')">* Введите Email адрес</p>
-            <p *ngIf="email.touched && email.hasError('email')">* Неккоректный Email адрес</p>
+            <p *ngIf="email.touched && email.hasError('pattern')">* Неккоректный Email адрес</p>
             <p *ngIf="email.touched && email.hasError('valueExists')">* Аккаунт с данным Email адресом уже существует
             </p>
         </div>

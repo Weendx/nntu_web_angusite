@@ -26,6 +26,7 @@ export class RegistrationFormComponent implements OnInit {
   constructor( public userService: UserService ) {}
 
   public ngOnInit(): void {
+    const emailRegexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     this.form = new FormGroup({
       username: new FormControl<string>('', 
         [ Validators.required, Validators.minLength(3) ], 
@@ -38,7 +39,7 @@ export class RegistrationFormComponent implements OnInit {
         Validators.required, equalToValidator('password')
       ]),
       email: new FormControl<string>('', 
-        [ Validators.required, Validators.email ],
+        [ Validators.required, Validators.pattern(emailRegexp) ],
         valueExistsValidator((val) => this.userService.checkEmail(val))
       ),
       question: new FormControl<string>('', [
