@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IPost, IPostExtended } from '../models';
+import { IPost, IPostExtended, IPostOptional } from '../models';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { NotificationService } from './notification.service';
 
@@ -50,6 +50,15 @@ export class PostService {
         return throwError(() => error.message);
       })
     );
+  }
+
+  public update(id: number, changes: IPostOptional): Observable<IPost> {
+    if (this.lastPost) {
+      if (this.lastPost.id === id) {
+        this.lastPost = {...this.lastPost, ...changes}
+      }
+    }
+    return this.http.patch<IPost>(this.url + `/posts/${id}`, changes);
   }
 
 }

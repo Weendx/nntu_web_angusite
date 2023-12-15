@@ -7,3 +7,5 @@ export interface IPost {
     userId: number,
     views: number
 }
+
+export interface IPostOptional extends Partial<IPost> {}
