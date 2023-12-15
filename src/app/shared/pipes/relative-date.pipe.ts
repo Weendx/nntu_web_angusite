@@ -33,11 +33,11 @@ export class RelativeDatePipe implements PipeTransform {
     const now = Date.now();
     const date = new Date(timestamp);
     const delta = (now - timestamp) / 1000;
-    console.log(delta, now, timestamp);
     
     if (delta < 60) {
-      const s = this.declOfNum(delta, ['секунду', 'секунды', 'секунд']);
-      return `${delta} ${s} назад`;
+      const seconds = Math.floor(delta);
+      const s = this.declOfNum(seconds, ['секунду', 'секунды', 'секунд']);
+      return `${seconds} ${s} назад`;
     } else if (delta < 3600) {
       const minutes = Math.floor(delta / 60);
       const s = this.declOfNum(minutes, ['минуту', 'минуты', 'минут']);
@@ -53,7 +53,6 @@ export class RelativeDatePipe implements PipeTransform {
     } else {
       return `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`;
     }
-    return `${timestamp}`;
   }
 
   private declOfNum(n: number, text_arr: string[]): string {
