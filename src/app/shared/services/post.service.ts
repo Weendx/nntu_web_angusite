@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IPost, IPostExtended } from '../models';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { NotificationService } from './notification.service';
 
 @Injectable({
@@ -10,6 +10,8 @@ import { NotificationService } from './notification.service';
 export class PostService {
 
   private url = 'http://localhost:3000';
+
+  public lastPost?: IPostExtended;
 
   constructor( private http: HttpClient, private notifyService: NotificationService ) {}
 
@@ -36,7 +38,8 @@ export class PostService {
       catchError((error: HttpErrorResponse) => {
         this.notifyService.send('[Post] Проблема с подключением к серверу. ' + error.message);
         return throwError(() => error.message);
-      })
+      }),
+      tap((post: IPostExtended) => this.lastPost = post)
     );
   }
 
