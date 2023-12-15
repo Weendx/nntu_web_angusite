@@ -5,5 +5,7 @@ export interface IComment {
     body: string,
     timestamp: number,
     updateTimestamp?: number,
-    replyTo?: number
+    replyTo?: number,
+    isDeleted?: boolean,
+    isRoot?: boolean
 }
