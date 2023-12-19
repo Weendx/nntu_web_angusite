@@ -3,15 +3,19 @@
         <div slot="article">
             <app-container header="Информация о проекте">
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis, consequuntur?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime at nostrum omnis debitis iusto, illo itaque vitae. Assumenda, iste nemo laborum veritatis rem voluptatem velit consectetur facilis? Necessitatibus, repudiandae excepturi!</p>
             </app-container>
-            <app-container header="Второй сервер отмечает день рождения!">
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde nulla nam assumenda eligendi illum
-                    doloribus. Porro, quam quae amet ea rem animi?</p>
+            <app-container *ngFor="let post of posts" [header]="post.title" class="type_post"
+                (headerClick)="toPost(post.id!)">
+                {{ post.bodyPreview }}
             </app-container>
-            <app-container header="Изменения в двухфакторной аутентификации">
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel est perspiciatis obcaecati
-                    exercitationem accusantium commodi maiores nostrum nesciunt, modi aspernatur?</p>
-            </app-container>
+            <app-not-found 
+                header="Записей пока нет" 
+                text="Загляните позднее" 
+                *ngIf="posts.length === 0"
+                style="margin: 0 auto; width: 100%"
+                [doNotShowBack]="true"
+            ></app-not-found>
         </div>
         <div slot="aside">
             <app-container header="Личный кабинет">
