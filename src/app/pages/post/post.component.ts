@@ -4,6 +4,8 @@ import { IPost, IPostExtended } from 'src/app/shared/models';
 import { PostService, UserService } from 'src/app/shared/services';
 import { UserRole } from 'src/app/shared/types';
 import { CurrentUser, UpdatedPostData } from './post.types';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 type PostState = "normal" | "editing";
 
@@ -15,6 +17,7 @@ type PostState = "normal" | "editing";
 export class PostComponent implements OnInit, OnDestroy {
   
   public isLoaded = false;
+  public notFound = false;
   public postId!: number;
   public currentUser: CurrentUser = { id: -1, isAdmin: false };
   public currentState: PostState = "normal";
@@ -32,20 +35,27 @@ export class PostComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(
       (params) => {
         this.postId = params.id;
-        this.postService.getExtendedById(this.postId).subscribe(
+        this.postService.getExtendedById(this.postId).pipe(
+          catchError((error: HttpErrorResponse) => {
+            if (error.status === 404) {
+              this.notFound = true;
+            }
+            return throwError(() => error);
+          })
+        ).subscribe(
           // результаты запроса сохраняются в сервисе
           (post: IPostExtended) => {
-            if (post) 
+            if (post) {
               this.isLoaded = true;
-            this.viewsTimeoutId = window.setTimeout(() => {
-              this.increaseViews();
-              this.viewsTimeoutId = -1;
-            }, this.postReadTimeout)
+              this.viewsTimeoutId = window.setTimeout(() => {
+                this.increaseViews();
+                this.viewsTimeoutId = -1;
+              }, this.postReadTimeout)
+            }
           }
         );
       }
     );
-    
     this.userService.currentUser$.subscribe(
       (user) => {
         if (!user) return;
@@ -88,7 +98,16 @@ export class PostComponent implements OnInit, OnDestroy {
     if (!window.confirm("Вы точно хотите удалить эту запись?")) {
       return;
     }
-    this.postService.delete(Number(this.postId)).subscribe();
+    this.postService.delete(Number(this.postId)).subscribe(
+      () => {
+        this.isLoaded = false;
+        this.notFound = true;
+      }
+    );
+  }
+
+  public test() {
+    console.log(`In test, isLoaded: ${this.isLoaded}, notFound: ${this.notFound}`);
   }
 
 }

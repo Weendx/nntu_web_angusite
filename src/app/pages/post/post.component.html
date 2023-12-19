@@ -1,4 +1,5 @@
-<app-loading *ngIf="!isLoaded"></app-loading>
+<app-loading *ngIf="!isLoaded && !notFound"></app-loading>
+<app-not-found *ngIf="notFound" header="Запись не найдена"></app-not-found>
 <app-page-layout *ngIf="isLoaded && postService.lastPost! as postData">
     <div slot="article" *ngIf="postData.id! == postId">
         <app-container 

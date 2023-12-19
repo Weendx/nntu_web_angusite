@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IPost, IPostExtended, IPostOptional } from '../models';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { NotificationService } from './notification.service';
+import { Status } from '../types';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,8 @@ export class PostService {
   public getAll(): Observable<IPost[]> {
     return this.http.get<IPost[]>(this.url+'/posts?_sort=timestamp&_order=desc').pipe(
       catchError((error: HttpErrorResponse) => {
-        this.notifyService.send('[Post] Проблема с подключением к серверу. ' + error.message);
-        return throwError(() => error.message);
+        this.handleError(error);
+        return throwError(() => error);
       })
     );
   }
@@ -34,8 +35,8 @@ export class PostService {
   public getById(id: number): Observable<IPost> {
     return this.http.get<IPost>(this.url+`/posts/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.notifyService.send('[Post] Проблема с подключением к серверу. ' + error.message);
-        return throwError(() => error.message);
+        this.handleError(error);
+        return throwError(() => error);
       })
     );
   }
@@ -43,8 +44,8 @@ export class PostService {
   public getExtendedById(id: number): Observable<IPostExtended> {
     return this.http.get<IPostExtended>(this.url+`/posts/${id}?_embed=comments&_expand=user`).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.notifyService.send('[Post] Проблема с подключением к серверу. ' + error.message);
-        return throwError(() => error.message);
+        this.handleError(error);
+        return throwError(() => error);
       }),
       tap((post: IPostExtended) => this.lastPost = post)
     );
@@ -53,8 +54,8 @@ export class PostService {
   public create(post: IPost): Observable<IPost> {
     return this.http.post<IPost>(this.url+'/posts', post).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.notifyService.send('[Post] Проблема с подключением к серверу. ' + error.message);
-        return throwError(() => error.message);
+        this.handleError(error);
+        return throwError(() => error);
       })
     );
   }
@@ -72,7 +73,7 @@ export class PostService {
     return this.http.delete(this.url + `/posts/${id}`).pipe(
       catchError((error: HttpErrorResponse) => {
         this.notifyService.send('[Post] Проблема с подключением к серверу. ' + error.message);
-        return throwError(() => error.message);
+        return throwError(() => error);
       }),
       tap((_) => {
         if (id === this.lastPost?.id) {
@@ -80,6 +81,14 @@ export class PostService {
         }        
       })
     );
+  }
+
+  private handleError(error: HttpErrorResponse): void {
+    if (error.status === 404) {
+      this.notifyService.send('Запись не найдена');
+    } else {
+      this.notifyService.send('[Post] Проблема с подключением к серверу. ' + error.message, Status.Error, 3000);
+    }
   }
 
 }
