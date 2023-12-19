@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPostExtended } from 'src/app/shared/models';
+import { IPost, IPostExtended } from 'src/app/shared/models';
 import { PostService, UserService } from 'src/app/shared/services';
 import { UserRole } from 'src/app/shared/types';
-import { CurrentUser } from './post.types';
+import { CurrentUser, UpdatedPostData } from './post.types';
 
+type PostState = "normal" | "editing";
 
 @Component({
   selector: 'app-post',
@@ -16,6 +17,7 @@ export class PostComponent implements OnInit, OnDestroy {
   public isLoaded = false;
   public postId!: number;
   public currentUser: CurrentUser = { id: -1, isAdmin: false };
+  public currentState: PostState = "normal";
 
   private viewsTimeoutId = -1;
   private postReadTimeout = 5000;  // Время чтения поста для +1 к просмотру
@@ -65,6 +67,28 @@ export class PostComponent implements OnInit, OnDestroy {
         views: this.postService.lastPost.views + 1
       }).subscribe();
     }
+  }
+
+  public onEdit(): void {
+    this.currentState = "editing";
+  }
+
+  public onEditStop(): void {
+    this.currentState = "normal";
+  }
+
+  public onEditSave(updated: UpdatedPostData | undefined): void {
+    if (updated) {
+      this.postService.lastPost = {...this.postService.lastPost!, ...updated};
+    }
+    this.onEditStop();
+  }
+
+  public onDelete(): void {
+    if (!window.confirm("Вы точно хотите удалить эту запись?")) {
+      return;
+    }
+    this.postService.delete(Number(this.postId)).subscribe();
   }
 
 }

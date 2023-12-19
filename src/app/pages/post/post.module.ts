@@ -7,6 +7,8 @@ import { CommentComponent } from 'src/app/components/comment/comment.component';
 import { AddCommentComponent } from 'src/app/components/add-comment/add-comment.component';
 import { CommentThreadComponent } from 'src/app/components/comment-thread/comment-thread.component';
 import { FormsModule } from '@angular/forms';
+import { EditPostComponent } from 'src/app/components/edit-post/edit-post.component';
+
 
 const routes: Routes = [
   {path: '', component: PostComponent}
@@ -17,7 +19,8 @@ const routes: Routes = [
     PostComponent,
     CommentComponent,
     AddCommentComponent,
-    CommentThreadComponent
+    CommentThreadComponent,
+    EditPostComponent
   ],
   imports: [
     CommonModule,

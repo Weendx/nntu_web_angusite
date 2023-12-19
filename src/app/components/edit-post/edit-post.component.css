@@ -1,0 +1,62 @@
+.addpost__field:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.addpost__field {
+    position: relative;
+    padding-top: 0.25rem;
+}
+
+.addpost__field label {
+    position: absolute;
+    font-size: 0.86em;
+    background: white;
+    width: auto;
+    left: 0.75rem;
+    top: -0.25rem;
+    color: var(--color-black-3);
+    padding: 0 0.1rem;
+    font-weight: 300;
+}
+
+.addpost__field input[type=text],
+.addpost__field textarea {
+    width: 100%;
+    font-size: 0.9em;
+}
+
+.addpost__field .ng-touched.ng-invalid {
+    border-color: var(--color-red-1);
+}
+
+.editpost__submit {
+    text-align: center;
+}
+
+.editpost__submit input {
+    color: var(--color-white-1);
+    cursor: pointer;
+    font-size: 0.8em;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.15px;
+    padding: 0.8rem 0.75rem;
+    background: var(--color-secondary-b);
+    border-radius: var(--elements-border-radius);
+    width: 48%;
+    transition: background 0.2s;
+}
+
+.editpost__submit input:hover {
+    color: var(--color-white-2);
+    background: var(--color-secondary-b-hover);
+}
+
+.editpost__submit input[value="Отмена"] {
+    margin-right: 2%;
+    background: var(--color-secondary-a);
+}
+
+.editpost__submit input[value="Отмена"]:hover {
+    background: var(--color-secondary-a-hover);
+}

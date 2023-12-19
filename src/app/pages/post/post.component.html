@@ -1,7 +1,11 @@
 <app-loading *ngIf="!isLoaded"></app-loading>
 <app-page-layout *ngIf="isLoaded && postService.lastPost! as postData">
     <div slot="article" *ngIf="postData.id! == postId">
-        <app-container header="{{ postData.title }}" class="post">
+        <app-container 
+            header="{{ postData.title }}" 
+            class="post"
+            *ngIf="currentState == 'normal'"
+        >
             <div class="post__metadata">
                 <div class="flexgroup">
                     <div class="metadata__author img-text">
@@ -22,11 +26,11 @@
                 </div>
             </div>
             <div class="post__tools" *ngIf="postData.userId === currentUser.id || currentUser.isAdmin">
-                <div class="img-text">
+                <div class="img-text" (click)="onEdit()">
                     <img src="/assets/img/pen.png" width="16">
                     <span>Изменить</span>
                 </div>
-                <div class="img-text">
+                <div class="img-text" (click)="onDelete()">
                     <img src="/assets/img/archive.png" width="16">
                     <span>Удалить</span>
                 </div>
@@ -34,6 +38,12 @@
             <div class="post__content">
                 {{ postData.body }}
             </div>
+        </app-container>
+        <app-container
+            header="Редактирование записи"
+            *ngIf="currentState == 'editing'"
+        >
+            <post-edit-post [dataPostInfo]="postData" (edited)="onEditSave($event)" ></post-edit-post>
         </app-container>
         <app-container header="Комментарии">
             <div *ngFor="let comment of postData.comments">

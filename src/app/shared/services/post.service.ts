@@ -10,8 +10,15 @@ import { NotificationService } from './notification.service';
 export class PostService {
 
   private url = 'http://localhost:3000';
+  private _lastPost?: IPostExtended;
 
-  public lastPost?: IPostExtended;
+  get lastPost(): IPostExtended | undefined {
+    return this._lastPost;
+  }
+
+  set lastPost(updatedPost: IPostExtended) {
+    this._lastPost = updatedPost;
+  }
 
   constructor( private http: HttpClient, private notifyService: NotificationService ) {}
 
@@ -59,6 +66,20 @@ export class PostService {
       }
     }
     return this.http.patch<IPost>(this.url + `/posts/${id}`, changes);
+  }
+
+  public delete(id: number) {
+    return this.http.delete(this.url + `/posts/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.notifyService.send('[Post] Проблема с подключением к серверу. ' + error.message);
+        return throwError(() => error.message);
+      }),
+      tap((_) => {
+        if (id === this.lastPost?.id) {
+          delete this._lastPost;
+        }        
+      })
+    );
   }
 
 }
