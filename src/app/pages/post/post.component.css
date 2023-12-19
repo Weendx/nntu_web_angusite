@@ -30,6 +30,7 @@
     margin-top: 0.7rem;
     font-size: 0.95em;
     cursor: pointer;
+    display: inline-block;
 }
 
 .post__tools>*:not(:last-child) {
