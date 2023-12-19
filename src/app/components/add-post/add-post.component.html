@@ -1,7 +1,14 @@
 <form (ngSubmit)="addPost()">
     <div class="addpost__field">
         <label for="addpost__field-header">Заголовок</label>
-        <input type="text" id="addpost__field-header" [(ngModel)]="postData.header" name="header" required="">
+        <input 
+            type="text" 
+            id="addpost__field-header" 
+            [(ngModel)]="postData.header" 
+            name="header" 
+            required=""
+            autocomplete="off"
+        >
     </div>
     <div class="addpost__field">
         <label for="addpost__field-bodyPreview">Краткое содержание</label>

@@ -13,7 +13,14 @@
     </div>
     <div slot="aside">
         <app-container header="Фильтр" class="news__filter">
-            <input type="text" name="filter-search" id="filter-search" [(ngModel)]="newsFilter" placeholder="Поиск...">
+            <input 
+                type="text" 
+                name="filter-search" 
+                id="filter-search" 
+                [(ngModel)]="newsFilter" 
+                placeholder="Поиск..."
+                autocomplete="off"
+            >
             <button (click)="clearFilter()">Очистить</button>
         </app-container>
         <app-monitoring></app-monitoring>
