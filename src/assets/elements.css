@@ -28,6 +28,24 @@ button {
   border-radius: var(--elements-border-radius);
 }
 
+.button {
+  color: var(--color-white-1);
+  cursor: pointer;
+  font-size: 0.8em;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: 0.15px;
+  padding: 0.8rem 0.75rem;
+  background: var(--color-secondary-b);
+  border-radius: var(--elements-border-radius);
+  width: 48%;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: var(--color-secondary-b-hover);
+}
+
 /* --- */
 .spacing_size_sm {
   margin-top: 0.6rem;
