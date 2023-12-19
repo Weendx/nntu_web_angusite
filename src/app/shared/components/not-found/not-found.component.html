@@ -1,0 +1,12 @@
+<app-container>
+    <div class="spacing_size_m"></div>
+    <img src="/assets/img/not-found.png" [alt]="header" width="128">
+    <p class="header">{{ header }}</p>
+    <div class="spacing_size_m"></div>
+    <div *ngIf="text">
+        <p class="text">{{ text }}</p>
+        <div class="spacing_size_l"></div>
+    </div>
+    <a href="/" class="button">Перейти на главную</a>
+    <div class="spacing_size_m"></div>
+</app-container>
