@@ -9,5 +9,6 @@ export class NotFoundComponent {
 
   @Input() header: string = "Страница не найдена";
   @Input() text?: string;
+  @Input() doNotShowBack?: boolean;
 
 }
