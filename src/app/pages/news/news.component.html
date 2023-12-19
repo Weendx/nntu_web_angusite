@@ -1,6 +1,6 @@
 <app-page-layout>
     <div slot="article">
-        <app-container *ngFor="let post of posts" [header]="post.title" class="type_post"
+        <app-container *ngFor="let post of posts | filterPosts :newsFilter" [header]="post.title" class="type_post"
             (headerClick)="toPost(post.id!)">
             {{ post.bodyPreview }}
         </app-container>
