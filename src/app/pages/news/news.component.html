@@ -4,6 +4,12 @@
             (headerClick)="toPost(post.id!)">
             {{ post.bodyPreview }}
         </app-container>
+        <app-not-found 
+            header="Записей пока нет" 
+            text="Загляните позднее" 
+            *ngIf="posts.length === 0"
+            style="margin: 0 auto; width: 100%"
+        ></app-not-found>
     </div>
     <div slot="aside">
         <app-container header="Фильтр" class="news__filter">

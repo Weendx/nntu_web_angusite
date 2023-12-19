@@ -10,7 +10,7 @@ import { PostService } from 'src/app/shared/services';
 })
 export class NewsComponent implements OnInit {
   public newsFilter = '';
-  public posts!: IPost[];
+  public posts: IPost[] = [];
 
   constructor( public postService: PostService, private router: Router ) {}
 
