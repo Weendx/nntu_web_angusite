@@ -20,9 +20,6 @@
         <textarea id="addpost__field-body" cols="50" rows="10" class="form-field" [(ngModel)]="postData.body"
             name="body" required=""></textarea>
     </div>
-    <div class="addpost__msg">
-        <p *ngIf="postData.formMsg"><span>({{ postData.formMsgId }}) </span>{{ postData.formMsg }}</p>
-    </div>
     <div class="addpost__submit">
         <input type="submit" value="Добавить запись">
     </div>

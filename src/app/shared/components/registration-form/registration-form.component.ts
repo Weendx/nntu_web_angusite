@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
-import { UserService } from '../../services';
+import { NotificationService, UserService } from '../../services';
 import { IUser } from '../../models';
 import { equalToValidator, valueExistsValidator } from '../../validators';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormMessage } from '../../common';
+import { Status } from '../../types';
 
 
 @Component({
@@ -15,7 +15,6 @@ import { FormMessage } from '../../common';
 })
 export class RegistrationFormComponent implements OnInit {
   public form!: FormGroup;
-  public formMsg!: FormMessage;
   public classes: {[key: string]: string[]} = {
     'rulesCheck': [],
     'captchaCheck': []
@@ -23,7 +22,10 @@ export class RegistrationFormComponent implements OnInit {
   public isFormSubmitted = false;
   public isRegistered = false;
 
-  constructor( public userService: UserService ) {}
+  constructor( 
+    public userService: UserService,
+    private notifyService: NotificationService
+  ) {}
 
   public ngOnInit(): void {
     const emailRegexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -55,7 +57,6 @@ export class RegistrationFormComponent implements OnInit {
         Validators.requiredTrue
       ])
     })
-    this.formMsg = new FormMessage(4000);
   }
 
   get username(): FormControl {
@@ -107,7 +108,7 @@ export class RegistrationFormComponent implements OnInit {
     console.log(this.form, this.classes);
     if (this.form.invalid) {
       console.log('form invalid');
-      this.formMsg.show('Проверьте правильность заполнения полей формы');
+      this.notifyService.send('Проверьте правильность заполнения полей формы', Status.Error, 3000);
       return;
     }
     // form should be valid here...
@@ -124,13 +125,13 @@ export class RegistrationFormComponent implements OnInit {
 
     this.userService.create(user).pipe(
       catchError((error: HttpErrorResponse) => {
-        this.formMsg.show('Проблема с подключением к серверу');
+        this.notifyService.send('Проблема с подключением к серверу');
         return throwError(() => error.message);
       })
     ).subscribe((user) => {
       console.log(user);
       if (!user) {
-        this.formMsg.show('Ошибка при создании учетной записи, обратитесь к администрации');
+        this.notifyService.send('Ошибка при создании учетной записи, обратитесь к администрации', Status.Error, 3000);
         return;
       }
       window.sessionStorage.setItem('userId', String(user.id));

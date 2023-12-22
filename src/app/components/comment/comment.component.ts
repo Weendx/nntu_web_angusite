@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CurrentUser } from 'src/app/pages/post/post.types';
 import { IComment, IUser } from 'src/app/shared/models';
-import { CommentService, NotificationService, PostService, UserService } from 'src/app/shared/services';
+import { CommentService, NotificationService, UserService } from 'src/app/shared/services';
 import { Status } from 'src/app/shared/types';
 
 

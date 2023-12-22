@@ -53,18 +53,6 @@
     background: var(--color-secondary-b-hover);
 }
 
-.signup__group-msg {
-    display: flex;
-    justify-content: center;
-}
-
-.signup__group-msg p {
-    color: var(--color-red-1);
-    font-size: 0.8em;
-    transition: 0.8s;
-    position: absolute;
-}
-
 .signup__success {
     display: flex;
     flex-direction: column;

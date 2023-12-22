@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserService } from '../../services';
+import { NotificationService, UserService } from '../../services';
+import { Status } from '../../types';
 
 
 @Component({
@@ -10,10 +11,12 @@ import { UserService } from '../../services';
 })
 export class LoginFormComponent implements OnInit {
   form!: FormGroup;
-  formMsg?: string | null;
   formMsgId = 0;
 
-  constructor( public userService: UserService ) {}
+  constructor( 
+    public userService: UserService,
+    private notifyService: NotificationService
+  ) {}
 
   public ngOnInit(): void {
     this.form = new FormGroup({
@@ -36,25 +39,24 @@ export class LoginFormComponent implements OnInit {
     this.userService.getByName(this.form.value.login).subscribe(
       (user) => {
         if (user.length == 0) {
-          this.formMsg = "Пользователь не найден";
-          this.formMsgId += 1;
+          this.notifyService.send(`(${++this.formMsgId}) Пользователь не найден`);
           return;
         }
         if (user[0].password !== this.form.value.password) {
-          this.formMsg = "Проверьте правильность введенных данных";
-          this.formMsgId += 1;
+          this.notifyService.send(
+            `(${++this.formMsgId}) Проверьте правильность введенных данных`, 
+            Status.None, 3000
+          );
           return;
         }
-        this.formMsg = "Успешный вход";
-        this.formMsgId += 1;
         window.sessionStorage.setItem('userId', String(user[0].id));
+        this.notifyService.send("Успешный вход", Status.Success);
       }
     );
   }
 
   public logout() {
     this.userService.logout();
-    this.formMsg = '';
     this.formMsgId = 0;
     this.form.reset();
   }

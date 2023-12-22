@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { equalToValidator } from '../../validators';
-import { UserService } from '../../services';
-import { FormMessage } from '../../common';
+import { NotificationService, UserService } from '../../services';
+import { Status } from '../../types';
 
 
 @Component({
@@ -13,10 +13,12 @@ import { FormMessage } from '../../common';
 export class ChngpassFormComponent implements OnInit {
 
   public form!: FormGroup;
-  public formMsg!: FormMessage;
   public isFormSubmitted = false;
 
-  constructor( private userService: UserService ) {}
+  constructor( 
+    private userService: UserService,
+    private notifyService: NotificationService
+  ) {}
 
   public ngOnInit(): void {
     this.form = new FormGroup({
@@ -30,7 +32,6 @@ export class ChngpassFormComponent implements OnInit {
       question: new FormControl<string>('', [ Validators.required ]),
       answer: new FormControl<string>('', [ Validators.required ])
     });
-    this.formMsg = new FormMessage(5000);
   }
 
   get login(): FormControl {
@@ -62,16 +63,16 @@ export class ChngpassFormComponent implements OnInit {
       (user) => {
         if (user.length == 0 || user[0].controlQuestion !== this.question.value
                 || user[0].controlAnswer !== this.answer.value) {
-          this.formMsg.show('Ошибка в заполнении полей формы: неверные данные');
+          this.notifyService.send('Ошибка в заполнении полей формы: неверные данные', Status.Error, 3000);
         } else {
           this.userService.updatePassword(user[0], this.newPassword.value).subscribe(
             (user) => {
               if (user.password === this.newPassword.value) {
-                this.formMsg.show("Пароль обновлён!", "success");
+                this.notifyService.send("Пароль обновлён!", Status.Success, 4000);
                 this.form.reset();
                 this.isFormSubmitted = false;
               } else {
-                this.formMsg.show("Что-то пошло не так", "error");
+                this.notifyService.send("Что-то пошло не так", Status.Error, 3000);
               }
             }
           );
