@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!this.userService.currentUser">
+<form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!currentUser">
     <div class="spacing_size_m"></div>
     <div class="signin__fields">
         <div [ngClass]="{'invalid': login.touched && login.invalid}">
@@ -23,10 +23,10 @@
         <a routerLink="/reset-password">Восстановить пароль</a>
     </div>
 </form>
-<div class="userinfo" *ngIf="this.userService.currentUser">
+<div class="userinfo" *ngIf="currentUser">
     <div>
-        <img [src]="this.userService.currentUser.ava" alt="User profile picture">
-        <p>{{ this.userService.currentUser.name }}</p>
+        <img [src]="currentUser!.ava" alt="User profile picture">
+        <p>{{ currentUser!.name }}</p>
     </div>
     <div>
         <button (click)="logout()">Выйти</button>

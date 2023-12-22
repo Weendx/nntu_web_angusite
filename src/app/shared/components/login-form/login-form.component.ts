@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotificationService, UserService } from '../../services';
 import { Status } from '../../types';
+import { IUser } from '../../models';
 
 
 @Component({
@@ -12,9 +13,10 @@ import { Status } from '../../types';
 export class LoginFormComponent implements OnInit {
   form!: FormGroup;
   formMsgId = 0;
+  currentUser: IUser | null = null;
 
   constructor( 
-    public userService: UserService,
+    private userService: UserService,
     private notifyService: NotificationService
   ) {}
 
@@ -22,7 +24,10 @@ export class LoginFormComponent implements OnInit {
     this.form = new FormGroup({
       login: new FormControl<string>('', [ Validators.required ]),
       password: new FormControl<string>('', [ Validators.required ])
-    });    
+    });
+    this.userService.currentUser$.subscribe(
+      (user) => this.currentUser = user
+    );
   }
 
   get login() {
@@ -51,12 +56,14 @@ export class LoginFormComponent implements OnInit {
         }
         window.sessionStorage.setItem('userId', String(user[0].id));
         this.notifyService.send("Успешный вход", Status.Success);
+        this.currentUser = user[0];
       }
     );
   }
 
   public logout() {
     this.userService.logout();
+    this.currentUser = null;
     this.formMsgId = 0;
     this.form.reset();
   }
