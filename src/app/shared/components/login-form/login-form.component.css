@@ -93,3 +93,11 @@
     background: var(--color-secondary-b);
     color: var(--color-white-1);
 }
+
+.signin__loading {
+    text-align: center;
+}
+
+.signin__loading img {
+    width: 100px;
+}

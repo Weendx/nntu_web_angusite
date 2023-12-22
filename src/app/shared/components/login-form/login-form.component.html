@@ -1,6 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!currentUser">
     <div class="spacing_size_m"></div>
-    <div class="signin__fields">
+    <div class="signin__loading" *ngIf="isLoading">
+        <img [src]="'./assets/img/loader-1s-200px.svg'" alt="Загрузка...">
+    </div>
+    <div class="signin__fields" *ngIf="!isLoading">
         <div [ngClass]="{'invalid': login.touched && login.invalid}">
             <label for="signin__login">Логин</label>
             <input type="text" id="signin__login" placeholder="Логин или Email" formControlName="login">

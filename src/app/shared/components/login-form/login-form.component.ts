@@ -14,6 +14,7 @@ export class LoginFormComponent implements OnInit {
   form!: FormGroup;
   formMsgId = 0;
   currentUser: IUser | null = null;
+  isLoading = false;
 
   constructor( 
     private userService: UserService,
@@ -39,10 +40,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   public submit() {
-    console.log(this.form);
+    this.isLoading = true;
     if (this.form.invalid) return;
     this.userService.getByName(this.form.value.login).subscribe(
       (user) => {
+        this.isLoading = false;
         if (user.length == 0) {
           this.notifyService.send(`(${++this.formMsgId}) Пользователь не найден`);
           return;
