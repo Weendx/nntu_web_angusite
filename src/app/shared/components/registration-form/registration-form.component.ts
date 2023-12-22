@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, AsyncValidatorFn } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotificationService, UserService } from '../../services';
 import { IUser } from '../../models';
 import { equalToValidator, valueExistsValidator } from '../../validators';

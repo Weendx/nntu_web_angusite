@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, map, of, retry, tap } from 'rxjs';
+import { Observable, map, of, tap } from 'rxjs';
 import { IUser } from '../models';
 
 @Injectable({

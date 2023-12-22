@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPost, IPostExtended } from 'src/app/shared/models';
+import { IPostExtended } from 'src/app/shared/models';
 import { PostService, UserService } from 'src/app/shared/services';
 import { UserRole } from 'src/app/shared/types';
 import { CurrentUser, UpdatedPostData } from './post.types';
