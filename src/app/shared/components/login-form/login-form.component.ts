@@ -40,8 +40,8 @@ export class LoginFormComponent implements OnInit {
   }
 
   public submit() {
-    this.isLoading = true;
     if (this.form.invalid) return;
+    this.isLoading = true;
     this.userService.getByName(this.form.value.login).subscribe(
       (user) => {
         this.isLoading = false;
